@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/my-description",
+	"version": "0.1.1",
+	"attributes": {
+		"color": {
+			"type": "string",
+			"default": "#000"
+		},
+		"backgroundcolor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"content": {
+			"type": "string"
+		},
+		"image": {
+			"type": "object",
+			"default": {
+				"url": "https://images.pexels.com/photos/533769/pexels-photo-533769.jpeg"
+			}
+		}
+	},
+	"title": "My Description",
+	"category": "widgets",
+	"icon": "playlist-audio",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"textdomain": "src/my-description",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

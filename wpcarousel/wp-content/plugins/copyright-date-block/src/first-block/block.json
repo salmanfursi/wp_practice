@@ -1,0 +1,77 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "create-block/first-block",
+	"version": "0.1.0",
+	"title": "First Block",
+	"category": "fursi-block",
+	"icon": "laptop",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"html": false,
+		"anchor": true,
+		"align": true,
+		"color": {
+			"text": true,
+			"background": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"textAlign": true
+		},
+		"layout": {
+			"default": {
+				"type": "flex",
+				"flexWrap": "wrap"
+			},
+			"allowSwitching": true
+		},
+		"background": {
+			"backgroundImage": true,
+			"backgroundSize": true
+		},
+		"dimensions": {
+			"minHeight": true,
+			"width": true
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
+	},
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "right"
+		},
+		"style": {
+			"type": "object",
+			"default": {
+				"spacing": {
+					"padding": { "top": "100px", "bottom": "100px" }
+				},
+				"background": {
+					"backgroundImage": {
+						"url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+						"source": "file",
+						"title": "Default Background"
+					},
+					"backgroundSize": "cover"
+				}
+			}
+		}
+	},
+	"textdomain": "first-block",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
