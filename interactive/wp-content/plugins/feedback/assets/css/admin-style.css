@@ -1,0 +1,68 @@
+/* admin-style.css */
+
+/* General wrapper spacing */
+.wrap h1 {
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+.widefat.fixed.striped {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* Table header */
+.widefat.fixed.striped thead th {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Table body rows */
+.widefat.fixed.striped tbody td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+/* Zebra striping for readability */
+.widefat.fixed.striped tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+
+/* Hover effect */
+.widefat.fixed.striped tbody tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* No feedback message styling */
+.widefat.fixed.striped tbody tr td[colspan="5"] {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+/* Responsive table for small screens */
+@media screen and (max-width: 768px) {
+    .widefat.fixed.striped thead {
+        display: none;
+    }
+    .widefat.fixed.striped tbody td {
+        display: block;
+        width: 100%;
+        padding-left: 50%;
+        position: relative;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .widefat.fixed.striped tbody td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        font-weight: bold;
+        text-align: left;
+    }
+}

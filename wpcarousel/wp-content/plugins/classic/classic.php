@@ -94,3 +94,24 @@ function wporg_custom_post_type_and_tax() {
 }
 
 add_action('init', 'wporg_custom_post_type_and_tax');
+
+
+ add_shortcode('store_info', 'sbs_show_store');
+
+function sbs_show_store() {
+    $opt = get_option('sbs_store_options');
+
+    // ডাটা না থাকলে ডিফল্ট ভ্যালু সেট করা (যাতে এরর না আসে)
+    $name  = $opt['name'] ?? 'Default Shop';
+    $email = $opt['email'] ?? 'info@shop.com';
+    $type  = $opt['type'] ?? 'online';
+
+    // ইউটিলাইজেশন: HTML এর ভেতর ডাটা বসানো
+    $html = "<div class='shop-card'>";
+    $html .= "<h2>Shop Name: $name-----</h2>";
+    $html .= "<p>Contact: $email</p>";
+    $html .= "<p>Store Type: " . ucfirst($type) . "</p>";
+    $html .= "</div>";
+
+    return $html;
+}
