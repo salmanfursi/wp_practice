@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/faq-accordion",
+  "version": "0.1.0",
+  "title": "Faq Accordion",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Example block scaffolded with Create Block tool.",
+  "example": {},
+  "supports": {
+    "reusable": false,
+    "html": false
+  },
+  "attributes": {
+    "column": {
+      "type": "number",
+      "default": 2
+    }
+  },
+  "textdomain": "faq-accordion",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

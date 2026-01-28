@@ -1,0 +1,30 @@
+ 
+//for apply text navigate the dom and then chose the classname and then appi color to it within the editor after mantion the classname of the devtool !
+.wp-block-create-block-faq-accordion {
+	display: flex;
+	flex-wrap: wrap;
+  
+	@for $i from 1 through 6 {
+    &.has-#{$i}-columns {
+        .wp-block-create-block-child-block {
+            width: calc(100% / #{$i} - 20px);
+        }
+    }
+	.wp-block-create-block-child-block{
+		margin:0px;
+		h4{
+			color:coral;
+			font-size: 22px;
+			font-weight: bold;
+			margin:0
+		}
+		p{
+			color: black;
+			font-size: 22px;
+			font-weight: 300; 
+			margin-bottom: 0px;
+		}
+	}
+}
+
+}
