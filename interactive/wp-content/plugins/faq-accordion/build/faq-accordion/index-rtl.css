@@ -113,16 +113,78 @@
   max-width: none;
   margin: 0;
 }
-.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="create-block/child-block"] h4 {
+@keyframes pulseOpacity {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .block-editor-media-placeholder {
+  margin-bottom: 10px;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .wp-block-create-block-child-block-img {
+  position: relative;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .wp-block-create-block-child-block-img.is-loading {
+  animation: pulseOpacity 1.5s ease-in-out infinite;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .wp-block-create-block-child-block-img .components-spinner {
+  position: absolute;
+  margin: auto;
+  top: 0%;
+  right: 0%;
+  left: 0;
+  bottom: 0;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] img {
+  margin-bottom: 10px;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] h4 {
   color: #222;
   font-size: 22px;
   font-size: bold;
   margin: 0;
 }
-.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="create-block/child-block"] p {
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] p {
   color: #565656;
   font-size: 16px;
   font-weight: 300;
   margin-bottom: 5px;
   margin-top: 5px;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-placeholder__notices {
+  width: 100%;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-notice__content {
+  margin: 0 !important;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-placeholder.is-medium .components-notice-list {
+  width: 100%;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-placeholder.is-medium .components-button {
+  width: auto !important;
+  justify-content: flex-start;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-placeholder.is-medium .components-placeholder__fieldset > * {
+  width: auto !important;
+}
+.wp-block-create-block-faq-accordion > .block-editor-inner-blocks > .block-editor-block-list__layout [data-type="create-block/child-block"] .components-notice__dismiss {
+  position: relative;
+  top: 0;
+}
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/child-block/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-create-block-child-block {
+  border: 1px dotted #f00;
 }

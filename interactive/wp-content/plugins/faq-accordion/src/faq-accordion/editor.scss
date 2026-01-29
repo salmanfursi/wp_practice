@@ -1,18 +1,18 @@
-
-
-
 .wp-block-create-block-faq-accordion {
 	display: block;
 
 	@for $i from 1 through 6 {
 		&.has-#{$i}-columns {
+
 			/* stylelint-disable-next-line selector-class-pattern */
-			> .block-editor-inner-blocks > .block-editor-block-list__layout > {
+			>.block-editor-inner-blocks>.block-editor-block-list__layout> {
 
 				[data-type="create-block/child-block"] {
 					width: calc(100% / #{$i} - 20px);
 				}
 
+
+				// here the position: static solve the issue you can find the soultion from the note of mine notion ;
 				.block-list-appender {
 					position: static;
 					align-self: stretch;
@@ -26,8 +26,10 @@
 			}
 		}
 	}
+
+
 	/* stylelint-disable-next-line selector-class-pattern */
-	> .block-editor-inner-blocks > .block-editor-block-list__layout {
+	>.block-editor-inner-blocks>.block-editor-block-list__layout {
 		display: flex;
 		flex-wrap: wrap;
 		margin-left: -10px;
@@ -38,8 +40,55 @@
 			margin: 0;
 		}
 
-		> [data-type="create-block/child-block"] {
- 
+
+
+		[data-type="create-block/child-block"] {
+
+			//so inside the datatype element have the h4 tag so directly point it but if we want to point image that was wrap by our div then have to chose the class name ok and also try with ai and put class inside it !
+			// Define the animation
+			@keyframes pulseOpacity {
+				0% {
+					opacity: 0.8;
+				}
+
+				50% {
+					opacity: 0.4;
+				}
+
+				100% {
+					opacity: 0.8;
+				}
+			}
+
+			.block-editor-media-placeholder {
+				margin-bottom: 10px;
+			}
+
+			.wp-block-create-block-child-block-img {
+				position: relative;
+
+				&.is-loading {
+					animation: pulseOpacity 1.5s ease-in-out infinite;
+				}
+
+				.components-spinner {
+					position: absolute;
+					margin: auto;
+					top: 0%;
+					left: 0%;
+					right: 0;
+					bottom: 0;
+
+				}
+
+			}
+
+
+
+			img {
+				margin-bottom: 10px;
+			}
+
 			h4 {
 				color: #222;
 				font-size: 22px;
@@ -54,6 +103,44 @@
 				margin-bottom: 5px;
 				margin-top: 5px;
 			}
+
+			//media place holder notice width design issue solved !
+			// Target the Notice Container
+			.components-placeholder__notices {
+				width: 100%; // Ensure it spans the full width of the child block
+			}
+
+			// 1. Remove margin from content as requested
+			.components-notice__content {
+				margin: 0 !important;
+			}
+
+			// 2. Fix the "Compressed" issue by overriding the placeholder's flex behavior
+			.components-placeholder.is-medium {
+				.components-notice-list {
+					width: 100%;
+				}
+
+				// Remove the forced 100% width on buttons that makes them stack weirdly
+				.components-button {
+					width: auto !important;
+					justify-content: flex-start; // Reset from 'center'
+				}
+
+				// Ensure the fieldset (buttons) doesn't stretch items incorrectly
+				.components-placeholder__fieldset>* {
+					width: auto !important;
+				}
+			}
+
+			// Target the dismiss button specifically
+			.components-notice__dismiss {
+				// Keeps the X button aligned properly if you removed margins elsewhere
+				position: relative;
+				top: 0;
+			}
+
+
 		}
 	}
 }

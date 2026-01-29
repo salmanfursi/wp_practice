@@ -13,8 +13,7 @@ export default function Edit({ attributes, setAttributes }) {
 	const blockProps = useBlockProps({
 		className: `has-${column}-columns`,
 	});
-console.log('column counts !:',column);
-	const TEMPLATE = [
+ 	const TEMPLATE = [
 		["create-block/child-block"],
 		["create-block/child-block"],
 		["create-block/child-block"]
