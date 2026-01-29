@@ -143,3 +143,13 @@
 [28-Jan-2026 08:07:34 UTC] Automatic updates starting...
 [28-Jan-2026 08:07:34 UTC] PHP Warning:  wp_update_plugins(): An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="https://wordpress.org/support/forums/">support forums</a>. (WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.) in /Users/th31/wpsites/interactive/wp-includes/functions.php on line 6131
 [28-Jan-2026 08:07:36 UTC] Automatic updates complete.
+[28-Jan-2026 11:34:17 UTC] PHP Warning:  Undefined array key "width" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 110
+[28-Jan-2026 11:34:17 UTC] PHP Warning:  Undefined array key "height" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 111
+[29-Jan-2026 03:54:55 UTC] PHP Warning:  Undefined array key "width" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 110
+[29-Jan-2026 03:54:55 UTC] PHP Warning:  Undefined array key "height" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 111
+[29-Jan-2026 05:06:44 UTC] PHP Warning:  Undefined array key "width" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 110
+[29-Jan-2026 05:06:44 UTC] PHP Warning:  Undefined array key "height" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 111
+[29-Jan-2026 08:06:45 UTC] Automatic updates starting...
+[29-Jan-2026 08:06:48 UTC] Automatic updates complete.
+[29-Jan-2026 11:03:56 UTC] PHP Warning:  Undefined array key "width" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 110
+[29-Jan-2026 11:03:56 UTC] PHP Warning:  Undefined array key "height" in /Users/th31/wpsites/interactive/wp-admin/includes/image.php on line 111
