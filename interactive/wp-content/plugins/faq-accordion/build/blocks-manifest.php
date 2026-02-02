@@ -42,6 +42,23 @@ return array(
 				'source' => 'attribute',
 				'selector' => 'img',
 				'attribute' => 'src'
+			),
+			'sizeSlug' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'socialLinks' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'link' => 'https://www.facebook.com/',
+						'icon' => 'dashicons-facebook'
+					),
+					array(
+						'link' => 'https://www.instagram.com/',
+						'icon' => 'dashicons-instagram'
+					)
+				)
 			)
 		),
 		'parent' => array(
@@ -67,7 +84,11 @@ return array(
 		),
 		'supports' => array(
 			'reusable' => false,
-			'html' => false
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			)
 		),
 		'attributes' => array(
 			'column' => array(

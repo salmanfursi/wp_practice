@@ -15,9 +15,8 @@ export default function Edit({ attributes, setAttributes }) {
 	});
  	const TEMPLATE = [
 		["create-block/child-block"],
-		["create-block/child-block"],
 		["create-block/child-block"]
-	];
+ 	];
 //with the template default value can be set for accordian you can st 2 !
 	return (
 		<div {...blockProps}>

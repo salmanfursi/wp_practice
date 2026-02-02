@@ -37,6 +37,23 @@
       "source": "attribute",
       "selector": "img",
       "attribute": "src"
+    },
+    "sizeSlug": {
+      "type": "string",
+      "default": "full"
+    },
+    "socialLinks": {
+      "type": "array",
+      "default": [
+        {
+          "link": "https://www.facebook.com/",
+          "icon": "dashicons-facebook"
+        },
+        {
+          "link": "https://www.instagram.com/",
+          "icon": "dashicons-instagram"
+        }
+      ]
     }
   },
   "parent": [
