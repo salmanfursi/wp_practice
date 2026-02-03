@@ -47,11 +47,11 @@
       "default": [
         {
           "link": "https://www.facebook.com/",
-          "icon": "dashicons-facebook"
+          "icon": "facebook"
         },
         {
           "link": "https://www.instagram.com/",
-          "icon": "dashicons-instagram"
+          "icon": "instagram"
         }
       ]
     }

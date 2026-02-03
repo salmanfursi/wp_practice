@@ -52,11 +52,11 @@ return array(
 				'default' => array(
 					array(
 						'link' => 'https://www.facebook.com/',
-						'icon' => 'dashicons-facebook'
+						'icon' => 'facebook'
 					),
 					array(
 						'link' => 'https://www.instagram.com/',
-						'icon' => 'dashicons-instagram'
+						'icon' => 'instagram'
 					)
 				)
 			)

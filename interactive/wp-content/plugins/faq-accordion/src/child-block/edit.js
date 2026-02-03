@@ -4,15 +4,13 @@ import './editor.scss';
 
 import { useBlockProps, RichText, MediaPlaceholder, BlockControls, MediaReplaceFlow, InspectorControls, store } from '@wordpress/block-editor';
 import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
-import {
-	people as imageIcon, dashicons_facebook
-} from '@wordpress/icons';
-import { useEffect, useRef, useState } from '@wordpress/element';
+import { people as imageIcon, twitter, instagram } from '@wordpress/icons';
+import { wordpress } from '@wordpress/icons';
+ import { useEffect, useRef, useState } from '@wordpress/element';
 import { Spinner, withNotices, ToolbarButton, PanelBody, TextControl, SelectControl, Icon } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
 import { usePrevious } from '@wordpress/compose';
-
+ 
 function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 	const blockProps = useBlockProps();
 	const { name, bio, url, alt, id, sizeSlug, socialLinks } = attributes;
@@ -20,9 +18,7 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 
 	const prevURL = usePrevious(url);
 
-	// console.log('social link is here :', socialLinks[0].icon);
-	console.log('icons-----------||', icons);
-
+	console.log('social link is here :', socialLinks[0].icon);
 
 
 	useEffect(() => {
@@ -179,22 +175,9 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 					onChange={(newBio) => setAttributes({ bio: newBio })}
 					placeholder={__('Enter bio...', 'faq-accordion')}
 				/>
+				{ /* Static Icon */}
+				<Icon icon={awards} />
 
-				<div className="wp-block-blocks-course-team-member-social-links">
-					<ul>
-						<li>
-							<a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-								<span className="dashicons dashicons-facebook"></span>
-								<Icon icon={dashicons_facebook}/>
-							</a>
-						</li>
-						<li>
-							<a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-								<span className="dashicons dashicons-instagram"></span>
-							</a>
-						</li>
-					</ul>
-				</div>
 
 
 			</div ></>

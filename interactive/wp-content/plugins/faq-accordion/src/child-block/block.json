@@ -45,8 +45,8 @@
 		"socialLinks":{
 			"type":"array",
 			"default":[
-				{"link":"https://www.facebook.com/","icon":"dashicons-facebook"},
-				{"link":"https://www.instagram.com/","icon":"dashicons-instagram"}
+				{"link":"https://www.facebook.com/","icon":"facebook"},
+				{"link":"https://www.instagram.com/","icon":"instagram"}
 			]
 		}
 	},
