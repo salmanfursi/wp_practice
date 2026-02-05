@@ -53,7 +53,23 @@ function create_block_faq_accordion_block_init() {
 	 */
 	$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
 	foreach ( array_keys( $manifest_data ) as $block_type ) {
-		register_block_type( __DIR__ . "/build/{$block_type}" );
+		register_block_type( __DIR__ . "/build/{$block_type}" ); 
 	}
 }
 add_action( 'init', 'create_block_faq_accordion_block_init' );
+
+ 
+
+function my_block_enqueue_dashicons() {
+    // Enqueue dashicons for frontend
+    wp_enqueue_style('dashicons');
+}
+add_action('enqueue_block_assets', 'my_block_enqueue_dashicons');
+
+ 
+
+// Also enqueue for editor
+// function my_block_editor_assets() {
+//     wp_enqueue_style('dashicons');
+// }
+// add_action('enqueue_block_editor_assets', 'my_block_editor_assets');

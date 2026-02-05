@@ -43,6 +43,94 @@
 
 		[data-type="create-block/child-block"] {
 
+			.wp-block-blocks-course-team-member-social-links {
+				ul {
+					list-style: none;
+					padding: 0;
+					display: flex;
+					gap: 15px;
+					align-items: center;
+
+					li {
+						display: flex;
+
+						&.is-selected {
+							border: 1px solid #ffffff;
+						}
+
+						// 1. STYLE FOR ALL NORMAL SOCIAL BUTTONS
+						button {
+							background: none;
+							color: #e7f3fa;
+							display: flex;
+							align-items: center;
+							cursor: pointer;
+							border: 1px solid transparent; // Hidden border to prevent jumping
+							padding: 4px;
+							transition: all 0.2s ease;
+						}
+// --------------
+
+	cursor: grab;
+			
+			&:active {
+				cursor: grabbing;
+			}
+
+			button {
+				background: none;
+				border: none;
+				padding: 8px;
+				cursor: pointer;
+			}
+
+			// Show border when selected
+			&.is-selected button {
+				background: #007cba;
+				border-radius: 4px;
+				
+				svg {
+					fill: white;
+				}
+			}
+
+//---------------
+						// 2. SPECIAL STYLE FOR THE "ADD" BUTTON
+						&.wp-block-blocks-course-team-member-add-icon-li {
+							button {
+								border: 1px dashed #ccc; // Always dashed
+								color: #e2e2e2;
+								padding: 4px 8px;
+
+								&:hover {
+									border-style: dashed; // Keep it dashed on hover
+									border-color: #000;
+									color: #000000;
+									background: #d8d8d8;
+								}
+							}
+						}
+					}
+				}
+			}
+	 
+
+			.wp-block-blocks-course-team-member-social-form {
+				background: rgb(255, 255, 255);
+
+				border: 1px solid #e0e0e0;
+				padding: 12px;
+				margin-top: 15px;
+
+				.is-destructive {
+					border: red;
+					border-style: solid;
+					border-width: 1px;
+				}
+
+			}
+
+
 			//so inside the datatype element have the h4 tag so directly point it but if we want to point image that was wrap by our div then have to chose the class name ok and also try with ai and put class inside it !
 			// Define the animation
 			@keyframes pulseOpacity {

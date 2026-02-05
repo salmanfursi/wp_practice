@@ -4,22 +4,70 @@ import './editor.scss';
 
 import { useBlockProps, RichText, MediaPlaceholder, BlockControls, MediaReplaceFlow, InspectorControls, store } from '@wordpress/block-editor';
 import { isBlobURL, revokeBlobURL } from '@wordpress/blob';
-import { people as imageIcon, twitter, instagram } from '@wordpress/icons';
-import { wordpress } from '@wordpress/icons';
- import { useEffect, useRef, useState } from '@wordpress/element';
-import { Spinner, withNotices, ToolbarButton, PanelBody, TextControl, SelectControl, Icon } from '@wordpress/components';
+import { people as imageIcon, calendar } from '@wordpress/icons';
+import { useEffect, useRef, useState } from '@wordpress/element';
+import { Spinner, withNotices, ToolbarButton, PanelBody, TextControl, SelectControl, Icon, Button } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { usePrevious } from '@wordpress/compose';
- 
-function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
+import { Tooltip } from '@wordpress/components';
+
+
+// dnd kit imports
+import {
+	DndContext,
+	closestCenter,
+	KeyboardSensor,
+	PointerSensor,
+	useSensor,
+	useSensors,
+} from '@dnd-kit/core';
+import {
+	arrayMove,
+	SortableContext,
+	sortableKeyboardCoordinates,
+ 	horizontalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import SortableItem from './Sortable-Item';
+
+
+function Edit({ attributes, setAttributes, noticeOperations, noticeUI, isSelected }) {
 	const blockProps = useBlockProps();
 	const { name, bio, url, alt, id, sizeSlug, socialLinks } = attributes;
 	const [blobURL, setBlobURL] = useState(null);
+	const [selectedLink, setSelectedLink] = useState(null);
 
 	const prevURL = usePrevious(url);
 
-	console.log('social link is here :', socialLinks[0].icon);
 
+	 
+
+	// 1. PLACE THE SENSORS HERE
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: {
+                distance: 3, 
+            },
+        }),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+ 
+	const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+        const oldIndex = socialLinks.findIndex((_, i) => i === active.id);
+        const newIndex = socialLinks.findIndex((_, i) => i === over.id);
+
+        const newSocialLinks = arrayMove(socialLinks, oldIndex, newIndex);
+        setAttributes({ socialLinks: newSocialLinks });
+
+        // This ensures the item you just dragged BECOMES the selected one
+        setSelectedLink(newIndex);
+    }
+};
+	// above dnd kit above
 
 	useEffect(() => {
 		// Only revoke if the URL has actually changed to a permanent one
@@ -92,6 +140,27 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 			titleInputRef.current.focus();
 		}
 	}, [url]);
+
+	//icons selectedurl issue solve !
+	// Reset selected icon when the block itself is deselected
+	// for when unselect the block then the icon also got deselect ok || and then the prevselected not needed here !
+	useEffect(() => {
+		if (!isSelected) {
+			setSelectedLink(null);
+		}
+	}, [isSelected]);
+
+
+	const addNewSocialItem = () => {
+		setAttributes({
+			socialLinks: [
+				...socialLinks, // Copy existing links
+				{ link: '', icon: 'wordpress' } // Add the new default object
+			],
+		});
+		// thiis line to show seelcted every last item .
+		setSelectedLink(socialLinks.length)
+	};
 
 	return (
 		<>
@@ -175,12 +244,138 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI }) {
 					onChange={(newBio) => setAttributes({ bio: newBio })}
 					placeholder={__('Enter bio...', 'faq-accordion')}
 				/>
-				{ /* Static Icon */}
-				<Icon icon={awards} />
 
+				{/* <div className="wp-block-blocks-course-team-member-social-links">
+					<ul>
+						{socialLinks.map((item, index) => {
+							return (
+								<li key={index} className={selectedLink === index ? 'is-selected' : null} >
+									<button
+										aria-label={__(
+											'Add Social Link',
+											'faq-accordion'
+										)}
+										onClick={() => {
+											setSelectedLink(index)
+										}}
+									>
+										<Icon icon={item.icon} />
+									</button>
+								</li>
+							);
+						})}
+
+						{isSelected && socialLinks.length < 5 && (
+							<li className="wp-block-blocks-course-team-member-add-icon-li">
+								<Tooltip
+									text={__(
+										'Add Social Link',
+										'faq-accordion'
+									)}
+								>
+									<button
+										aria-label={__(
+											'Add Social Link',
+											'faq-accordion'
+										)}
+										onClick={addNewSocialItem}
+									>
+										<Icon icon="plus" />
+									</button>
+								</Tooltip>
+							</li>
+						)}
+					</ul>
+				</div> */}
+
+				<div className="wp-block-blocks-course-team-member-social-links">
+					<DndContext
+						sensors={sensors}
+						collisionDetection={closestCenter}
+						onDragEnd={handleDragEnd}
+					>
+						<SortableContext
+							items={socialLinks.map((_, index) => index)}
+							strategy={horizontalListSortingStrategy}
+						>
+							<ul>
+								{socialLinks.map((item, index) => (
+									<SortableItem
+										key={index}
+										id={index}
+										item={item}
+										index={index}
+										selectedLink={selectedLink}
+										setSelectedLink={setSelectedLink}
+									/>
+								))}
+
+								{isSelected && socialLinks.length < 5 && (
+									<li className="wp-block-blocks-course-team-member-add-icon-li">
+										<Tooltip
+											text={__('Add Social Link', 'faq-accordion')}
+										>
+											<button
+												aria-label={__('Add Social Link', 'faq-accordion')}
+												onClick={addNewSocialItem}
+											>
+												<Icon icon="plus" />
+											</button>
+										</Tooltip>
+									</li>
+								)}
+							</ul>
+						</SortableContext>
+					</DndContext>
+				</div>
+
+				{selectedLink !== null && socialLinks[selectedLink] && (
+					<div className="wp-block-blocks-course-team-member-social-form">
+						<TextControl
+							label={__('Link URL', 'faq-accordion')}
+							value={socialLinks[selectedLink].link}
+							onChange={(val) => {
+								const updatedLinks = [...socialLinks];
+								updatedLinks[selectedLink].link = val;
+								setAttributes({ socialLinks: updatedLinks });
+							}}
+						/>
+						<SelectControl
+							label={__('Icon', 'faq-accordion')}
+							value={socialLinks[selectedLink].icon}
+							options={[
+								{ label: 'WordPress', value: 'wordpress' },
+								{ label: 'Facebook', value: 'facebook' },
+								{ label: 'Twitter', value: 'twitter' },
+								{ label: 'LinkedIn', value: 'linkedin' },
+							]}
+							onChange={(val) => {
+								const updatedLinks = [...socialLinks];
+								updatedLinks[selectedLink].icon = val;
+								setAttributes({ socialLinks: updatedLinks });
+							}}
+						/>
+						<Button
+							className="is-destructive"
+							onClick={() => {
+								const updatedLinks = socialLinks.filter((_, i) => i !== selectedLink);
+								setAttributes({ socialLinks: updatedLinks });
+								setSelectedLink(null);
+							}}
+						>
+							{__('Remove Link', 'faq-accordion')}
+						</Button>
+					</div>
+				)}
 
 
 			</div ></>
 	);
 }
 export default withNotices(Edit)
+
+
+
+
+
+

@@ -50,13 +50,19 @@ return array(
 			'socialLinks' => array(
 				'type' => 'array',
 				'default' => array(
-					array(
-						'link' => 'https://www.facebook.com/',
-						'icon' => 'facebook'
+					
+				),
+				'source' => 'query',
+				'selector' => '.wp-block-blocks-course-team-member-social-links ul li',
+				'query' => array(
+					'icon' => array(
+						'source' => 'attribute',
+						'attribute' => 'data-icon'
 					),
-					array(
-						'link' => 'https://www.instagram.com/',
-						'icon' => 'instagram'
+					'link' => array(
+						'source' => 'attribute',
+						'selector' => 'a',
+						'attribute' => 'href'
 					)
 				)
 			)
@@ -77,11 +83,8 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Faq Accordion',
 		'category' => 'widgets',
-		'icon' => 'smiley',
+		'icon' => 'index-card',
 		'description' => 'Example block scaffolded with Create Block tool.',
-		'example' => array(
-			
-		),
 		'supports' => array(
 			'reusable' => false,
 			'html' => false,
@@ -94,6 +97,49 @@ return array(
 			'column' => array(
 				'type' => 'number',
 				'default' => 2
+			)
+		),
+		'example' => array(
+			'attributes' => array(
+				'column' => 2
+			),
+			'innerBlocks' => array(
+				array(
+					'name' => 'create-block/child-block',
+					'attributes' => array(
+						'name' => 'John Doe',
+						'bio' => 'Web Developer',
+						'url' => 'https://images.unsplash.com/photo-1761839258753-85d8eecbbc29?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+						'socialLinks' => array(
+							array(
+								'icon' => 'facebook',
+								'link' => '#'
+							),
+							array(
+								'icon' => 'twitter',
+								'link' => '#'
+							)
+						)
+					)
+				),
+				array(
+					'name' => 'create-block/child-block',
+					'attributes' => array(
+						'name' => 'John Doe',
+						'bio' => 'Web Developer',
+						'url' => 'https://images.unsplash.com/photo-1761839262867-af53d08b0eb5?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+						'socialLinks' => array(
+							array(
+								'icon' => 'facebook',
+								'link' => '#'
+							),
+							array(
+								'icon' => 'twitter',
+								'link' => '#'
+							)
+						)
+					)
+				)
 			)
 		),
 		'textdomain' => 'faq-accordion',

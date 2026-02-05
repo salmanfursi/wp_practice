@@ -44,16 +44,20 @@
     },
     "socialLinks": {
       "type": "array",
-      "default": [
-        {
-          "link": "https://www.facebook.com/",
-          "icon": "facebook"
+      "default": [],
+      "source": "query",
+      "selector": ".wp-block-blocks-course-team-member-social-links ul li",
+      "query": {
+        "icon": {
+          "source": "attribute",
+          "attribute": "data-icon"
         },
-        {
-          "link": "https://www.instagram.com/",
-          "icon": "instagram"
+        "link": {
+          "source": "attribute",
+          "selector": "a",
+          "attribute": "href"
         }
-      ]
+      }
     }
   },
   "parent": [

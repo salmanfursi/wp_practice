@@ -24,6 +24,8 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
@@ -48,6 +50,8 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
@@ -72,6 +76,8 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
@@ -96,6 +102,8 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
@@ -120,6 +128,8 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
@@ -144,10 +154,27 @@
   margin: 0;
 }
 .wp-block-create-block-faq-accordion .wp-block-create-block-child-block p {
+  display: flex;
+  flex-wrap: wrap;
   color: black;
   font-size: 22px;
   font-weight: 300;
   margin-bottom: 0px;
+}
+.wp-block-create-block-faq-accordion .wp-block-blocks-course-team-member-social-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.wp-block-create-block-faq-accordion .wp-block-blocks-course-team-member-social-links ul li:hover span {
+  color: #87c2e0;
+  border-color: #007cba;
+}
+.wp-block-create-block-faq-accordion .wp-block-blocks-course-team-member-social-links ul li span {
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 /*# sourceMappingURL=style-index.css.map*/
