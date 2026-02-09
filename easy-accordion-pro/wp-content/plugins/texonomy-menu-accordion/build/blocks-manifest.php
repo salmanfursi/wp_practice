@@ -1,0 +1,26 @@
+<?php
+// This file is generated. Do not modify it manually.
+return array(
+	'texonomy-menu-accordion' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/texonomy-menu-accordion',
+		'version' => '0.1.0',
+		'title' => 'Menu Accordion',
+		'category' => 'easy-accordion-cat',
+		'icon' => 'smiley',
+		'description' => 'Example block scaffolded with Create Block tool.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false
+		),
+		'textdomain' => 'texonomy-menu-accordion',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php',
+		'viewScript' => 'file:./view.js'
+	)
+);

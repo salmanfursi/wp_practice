@@ -95,7 +95,7 @@ function Edit({ attributes, setAttributes, noticeOperations, noticeUI, isSelecte
 		setAttributes({
 			url: newUrl,
 			id: undefined,
-			alt: '',
+			alt: '', 
 			sizeSlug: 'full'
 		});
 	};
