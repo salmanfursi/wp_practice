@@ -4,35 +4,104 @@
 @charset "UTF-8";
 /**
  * The following styles get applied inside the editor only.
- *
  * Replace them with your own styles or remove the file completely.
  */
-.wp-block-create-block-texonomy-menu-accordion {
-  border: 1px dotted #f00;
-}
-/* ১. প্যানেল হেডারকে ফ্লেক্সিবল করা যাতে আইকন ডানে যায় */
+/* ১. প্যানেল হেডার সেটিংস */
 .block-editor-inserter__panel-header {
   display: flex !important;
-  align-items: center;
-  justify-content: space-between;
+  align-items: start;
+  justify-content: flex-start;
+  /* টাইটেলের পাশে আইকন রাখার জন্য */
 }
-/* ২. টাইটেল টেক্সট দেখে আইকন বসানো */
-/* যেহেতু আপনার টাইটেলের ভেতর শুধু "EASY ACCORDION" লেখা আছে */
+/* ২. টাইটেল এর ওপর আইকন বসানো (স্ক্রিনশট অনুযায়ী এই ক্লাসটিই কাজ করছে) */
 .block-editor-inserter__panel-title::after {
-  /* এটি চেক করবে যে টাইটেলটি আপনার ক্যাটাগরির কি না */
   content: "";
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzExMzczXzIyNTEpIj4KPHBhdGggZD0iTTAuNTAwMDAxIDQuMDE1MTRDMC4yMjM4NTggNC4wMTUxNCAwIDQuMjM4OTkgMCA0LjUxNTE0VjExLjU0NTZDMCAxMS44MjE3IDAuMjIzODU4IDEyLjA0NTYgMC41IDEyLjA0NTZIMTUuNUMxNS43NzYyIDEyLjA0NTYgMTYgMTEuODIxNyAxNiAxMS41NDU2VjQuNTE1MTRDMTYgNC4yMzg5OSAxNS43NzYyIDQuMDE1MTQgMTUuNSA0LjAxNTE0SDAuNTAwMDAxWk0xNS4wMjY3IDEwLjUxMTRDMTUuMDI2NyAxMC43ODc1IDE0LjgwMjggMTEuMDExNCAxNC41MjY3IDExLjAxMTRIMS41MzQyMkMxLjI1ODA4IDExLjAxMTQgMS4wMzQyMiAxMC43ODc1IDEuMDM0MjIgMTAuNTExNFY3LjQ5NjEzQzEuMDM0MjIgNy4yMTk5OSAxLjI1ODA4IDYuOTk2MTMgMS41MzQyMiA2Ljk5NjEzSDE0LjUyNjdDMTQuODAyOCA2Ljk5NjEzIDE1LjAyNjcgNy4yMTk5OSAxNS4wMjY3IDcuNDk2MTNWMTAuNTExNFoiIGZpbGw9IiNGRjVCMkUiLz4KPHBhdGggZD0iTTAgMC41QzAgMC4yMjM4NTggMC4yMjM4NTggMCAwLjUgMEgxNS41QzE1Ljc3NjIgMCAxNiAwLjIyMzg1OCAxNiAwLjVWMi40ODFDMTYgMi43NTcxNCAxNS43NzYyIDIuOTgxIDE1LjUgMi45ODFIMC41MDAwMDFDMC4yMjM4NTggMi45ODEgMCAyLjc1NzE0IDAgMi40ODFWMC41WiIgZmlsbD0iI0ZGNUIyRSIvPgo8cGF0aCBkPSJNMCAxMy41MTlDMCAxMy4yNDI5IDAuMjIzODU4IDEzLjAxOSAwLjUgMTMuMDE5SDE1LjVDMTUuNzc2MiAxMy4wMTkgMTYgMTMuMjQyOSAxNiAxMy41MTlWMTUuNUMxNiAxNS43NzYyIDE1Ljc3NjIgMTYgMTUuNSAxNkgwLjUwMDAwMUMwLjIyMzg1OCAxNiAwIDE1Ljc3NjIgMCAxNS41VjEzLjUxOVoiIGZpbGw9IiNGRjVCMkUiLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xMTM3M18yMjUxIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=);
   background-size: contain;
   background-repeat: no-repeat;
   vertical-align: middle;
 }
-/* ৩. অন্য সব ক্যাটাগরির আইকন বন্ধ রাখা (যদি অন্যগুলোতে চলে আসে) */
-/* শুধু যখন এটি EASY ACCORDION এর হেডার হবে */
+/* ৩. ফিল্টার লজিক */
+/* যদি এই হেডারের পরের কন্টেন্টে EASY ACCORDION না থাকে, তবে আইকন মুছে দাও */
+/* :not(:has bole je jodi na thake then oita koro etc ! */
 .block-editor-inserter__panel-header:not(:has(+ .block-editor-inserter__panel-content [aria-label="EASY ACCORDION"])) .block-editor-inserter__panel-title::after {
-  display: none;
+  display: none !important;
+  /* !important দিন যাতে অন্য স্টাইল একে বাধা না দেয় */
+}
+/* accordion classes styles */
+/* Target the root block wrapper to ensure it centers in the editor */
+[data-type="create-block/texonomy-menu-accordion"] {
+  margin-top: 0 !important;
+  /* Removes top margin */
+  margin-bottom: 0 !important;
+  /* Removes bottom margin */
+  display: flex;
+  justify-content: center;
+  /* This centers the box inside the 750px wide container */
+  width: 350px;
+}
+.ea-main-editor-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: sans-serif;
+  border: 0 !important;
+  /* Clean Underline Styling */
+}
+.ea-main-editor-container .ea-editor-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item {
+  /* Parent: Light Gray */
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header {
+  background: #ebebeb;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(155, 155, 155);
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-title {
+  font-size: 18px;
+  color: #333;
+  /* Child count in parentheses */
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-title .sub-count {
+  color: #888;
+  margin-left: 5px;
+  font-weight: normal;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-icon-wrapper {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  /* এটিই ম্যাজিক */
+  color: #666;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-icon-wrapper.is-open {
+  transform: rotate(-180deg);
+  /* ক্লিক করলে অ্যারো ঘুরে যাবে */
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item {
+  /* Child: Darker Gray Shade */
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-editor-submenu .ea-item-header {
+  background: transparent;
+  padding-left: 40px;
+  /* Indent child items */
+  border-bottom: 1px solid #828282;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-editor-submenu .ea-item-header .ea-title {
+  font-size: 14px;
+  color: #555;
 }
 
 /*# sourceMappingURL=index.css.map*/

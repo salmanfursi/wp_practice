@@ -16,6 +16,12 @@ return array(
 		'supports' => array(
 			'html' => false
 		),
+		'attributes' => array(
+			'taxonomy' => array(
+				'type' => 'string',
+				'default' => 'category'
+			)
+		),
 		'textdomain' => 'texonomy-menu-accordion',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
