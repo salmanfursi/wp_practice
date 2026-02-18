@@ -6,6 +6,338 @@
  * The following styles get applied inside the editor only.
  * Replace them with your own styles or remove the file completely.
  */
+:root {
+  --ea-primary-orange: #FF5B2E;
+  --ea-gradient-orange: linear-gradient(90deg, #FF4B4B 0%, #FF9021 100%);
+  --wp-components-color-accent: var(--ea-primary-orange);
+  --wp-components-color-gray-600:#c4c4c4 ;
+}
+.ea-custom-toggle.components-toggle-group-control::before {
+  background: var(--ea-primary-orange) !important;
+  border-radius: 2px !important;
+  transition: all 0.3s ease !important;
+}
+.ea-custom-toggle.components-toggle-group-control .components-toggle-group-control-option-base[aria-checked=true] {
+  color: white !important;
+  background: transparent !important;
+}
+.ea-custom-toggle.components-toggle-group-control .components-toggle-group-control-option-base[aria-checked=true] * {
+  color: white !important;
+}
+.ea-custom-toggle.components-toggle-group-control .components-toggle-group-control-option-base {
+  transition: color 0.3s ease !important;
+}
+@keyframes spin-once {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.ea-custom-toggle-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+}
+.ea-custom-toggle-input .ea-label {
+  font-size: 12px;
+  font-weight: 150px !important;
+  color: #1e1e1e;
+}
+.ea-custom-toggle-input .ea-field .components-form-toggle .components-form-toggle__input:focus + .components-form-toggle__track {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.ea-custom-toggle-input .ea-field .components-form-toggle .components-form-toggle__track {
+  background-color: #c8c8c8 !important;
+  border: 1px solid #dedede !important;
+  transition: background-color 0.2s ease;
+}
+.ea-custom-toggle-input .ea-field .components-form-toggle .components-form-toggle__thumb {
+  background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+  top: 2px;
+  left: 2px;
+}
+.ea-custom-toggle-input .ea-field .components-form-toggle.is-checked .components-form-toggle__track {
+  background-color: var(--ea-primary-orange) !important;
+  border-color: var(--ea-primary-orange) !important;
+}
+.ea-custom-toggle-input .ea-field .components-base-control__field {
+  margin-bottom: 0 !important;
+}
+.components-combobox-control .components-form-token-field__suggestions-list {
+  box-shadow: inset 0 1px 0 0 var(--ea-primary-orange) !important;
+}
+.components-combobox-control .components-form-token-field__suggestion.is-selected {
+  background: var(--ea-primary-orange) !important;
+  color: #fff !important;
+}
+.components-combobox-control .custom-dropdown-icon svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+.components-combobox-control .components-flex:has(.components-combobox-control__input[aria-expanded=true]) .custom-dropdown-icon svg {
+  transform: rotate(180deg);
+}
+.components-base-control .components-base-control__label.components-base-control__label {
+  font-size: 12px !important;
+  font-weight: 300 !important;
+  line-height: 1.4 !important;
+  text-transform: none !important;
+  margin-bottom: 8px !important;
+  display: block;
+  color: #3c434a !important;
+}
+.ea-dropdown-wrapper .custom-dropdown-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+.ea-dropdown-wrapper .custom-dropdown-icon svg {
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ea-dropdown-inline .components-base-control__field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ea-dropdown-inline .components-base-control__label {
+  font-size: 12px !important;
+  font-weight: 200 !important;
+  margin-bottom: 0 !important;
+  white-space: nowrap;
+  min-width: 80px;
+  flex-shrink: 0;
+  text-transform: none !important;
+}
+.ea-dropdown-inline .components-combobox-control__suggestions-container {
+  flex: 1;
+  position: relative;
+}
+.ea-dropdown-inline .components-form-token-field__suggestions-list {
+  background-color: white !important;
+  border: 1px solid var(--ea-primary-orange) !important;
+  box-shadow: inset 0 1px 0 0 var(--ea-primary-orange) !important;
+  position: absolute !important;
+  z-index: 999999 !important;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.ea-dropdown-inline .components-form-token-field__suggestion.is-selected {
+  background: var(--ea-primary-orange) !important;
+  color: #fff !important;
+}
+.ea-dropdown-inline .components-combobox-control {
+  position: relative;
+  z-index: 1000;
+}
+.ea-dropdown-inline .components-combobox-control:has(.components-combobox-control__input[aria-expanded=true]) {
+  z-index: 999999;
+}
+.ea-responsive-range .ea-responsive-range__label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 300;
+  color: #3c434a;
+  line-height: 1.4;
+}
+.ea-responsive-range .components-range-control__track {
+  background: var(--ea-primary-orange) !important;
+}
+.ea-responsive-range__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ea-responsive-range__label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ea-responsive-range .ea-responsive-range body {
+  background: #f0f0f1;
+  color: #3c434a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 2px;
+  line-height: 1.4em;
+  min-width: 600px;
+}
+.ea-responsive-range .ea-responsive-range .components-range-control__track {
+  background: var(--ea-primary-orange) !important;
+}
+.ea-responsive-range .ea-responsive-range__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ea-responsive-range .ea-responsive-range__label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ea-responsive-range .ea-responsive-range__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ea-responsive-range .ea-responsive-range__reset-btn {
+  font-size: 18px;
+}
+.ea-responsive-range .ea-responsive-range__reset-btn.is-spinning svg {
+  animation: spin-once 0.5s ease-in-out;
+}
+.ea-responsive-range .ea-responsive-range__device-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 2px 4px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.ea-responsive-range .ea-responsive-range__body {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.ea-responsive-range .ea-responsive-range__body .ea-range-wrapper {
+  flex: 1;
+}
+.ea-responsive-range .ea-responsive-range__body .ea-number-input input[type=number] {
+  outline: none !important;
+  border: 0.5px solid #ddd;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.ea-responsive-range .ea-responsive-range__body .ea-number-input input[type=number]:focus {
+  outline: none !important;
+  border-color: var(--ea-primary-orange) !important;
+  box-shadow: 0 0 0 1px var(--ea-primary-orange);
+}
+.ea-responsive-range__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ea-responsive-range__reset-btn {
+  font-size: 18px;
+}
+.ea-responsive-range__reset-btn.is-spinning svg {
+  animation: spin-once 0.5s ease-in-out;
+}
+.ea-responsive-range__device-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 2px 4px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+.ea-responsive-range__body {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.ea-responsive-range__body .ea-range-wrapper {
+  flex: 1;
+}
+.ea-responsive-range__body .ea-number-input input[type=number] {
+  outline: none !important;
+  border: 0.5px solid #ddd;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.ea-responsive-range__body .ea-number-input input[type=number]:focus {
+  outline: none !important;
+  border-color: var(--ea-primary-orange) !important;
+  box-shadow: 0 0 0 1px var(--ea-primary-orange);
+}
+.ea-template-slider {
+  margin-bottom: 20px;
+}
+.ea-template-slider__wrapper {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  padding: 10px 40px;
+  margin-bottom: 12px;
+}
+.ea-template-slider__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+.ea-template-slider__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 18px;
+  transition: background 0.3s ease, color 0.3s ease;
+  background: white;
+  color: #555;
+  border: 1px solid #ddd;
+}
+.ea-template-slider__btn:hover {
+  background: var(--ea-primary-orange) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+.ea-template-slider__btn--active {
+  background: var(--ea-primary-orange) !important;
+  color: white !important;
+  border-color: transparent !important;
+}
+.ea-template-slider__btn--prev {
+  left: 5px;
+}
+.ea-template-slider__btn--next {
+  right: 5px;
+}
+.ea-template-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+.ea-template-slider__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease;
+  background: #ccc;
+}
+.ea-template-slider__dot--active {
+  background: var(--ea-primary-orange);
+}
+.ea-template-slider__dot:hover {
+  background: var(--ea-primary-orange);
+  opacity: 0.8;
+}
 /* ১. প্যানেল হেডার সেটিংস */
 .block-editor-inserter__panel-header {
   display: flex !important;
@@ -32,7 +364,6 @@
   display: none !important;
   /* !important দিন যাতে অন্য স্টাইল একে বাধা না দেয় */
 }
-/* accordion classes styles */
 /* Target the root block wrapper to ensure it centers in the editor */
 [data-type="create-block/texonomy-menu-accordion"] {
   margin-top: 0 !important;
@@ -89,6 +420,9 @@
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-icon-wrapper.is-open {
   transform: rotate(-180deg);
   /* ক্লিক করলে অ্যারো ঘুরে যাবে */
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item:last-child > .ea-item-header {
+  border-bottom: none;
 }
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item {
   /* Child: Darker Gray Shade */

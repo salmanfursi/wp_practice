@@ -11,3 +11,91 @@
   color: #fff;
   padding: 2px;
 }
+/**
+ * Frontend styles for Taxonomy Menu Accordion
+ */
+.wp-block-create-block-texonomy-menu-accordion {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.ea-main-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: sans-serif;
+}
+.ea-main-container .ea-accordion-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ea-main-container .ea-accordion-list .ea-item {
+  margin-bottom: 0 !important;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header {
+  background: #ebebeb;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(155, 155, 155);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header:hover {
+  background: #e0e0e0;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-title {
+  font-size: 18px;
+  color: #333;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-title a {
+  text-decoration: none;
+  color: inherit;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-title a:hover {
+  text-decoration: underline;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-title .sub-count {
+  color: #888;
+  margin-right: 5px;
+  font-weight: normal;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-icon-wrapper {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  color: #666;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-item-header .ea-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+}
+.ea-main-container .ea-accordion-list .ea-item:last-child > .ea-item-header {
+  border-bottom: none;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-submenu {
+  display: none;
+  padding-right: 20px;
+  background: #c4c0c0;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-submenu.is-open {
+  display: block;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-submenu .ea-item-header {
+  background: transparent;
+  padding-right: 40px;
+  border-bottom: 1px solid #828282;
+}
+.ea-main-container .ea-accordion-list .ea-item .ea-submenu .ea-item-header .ea-title {
+  font-size: 14px;
+  color: #555;
+}
+.ea-main-container .ea-accordion-list .ea-item.is-open > .ea-item-header .ea-icon-wrapper {
+  transform: rotate(180deg);
+}
+.ea-main-container .ea-accordion-list .ea-item.is-open > .ea-submenu {
+  display: block;
+}

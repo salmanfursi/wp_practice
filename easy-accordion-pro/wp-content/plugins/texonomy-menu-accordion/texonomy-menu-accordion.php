@@ -46,3 +46,5 @@ add_filter( 'block_categories_all', function( $categories ) {
     );
 }, 10, 1 );
 
+
+ 

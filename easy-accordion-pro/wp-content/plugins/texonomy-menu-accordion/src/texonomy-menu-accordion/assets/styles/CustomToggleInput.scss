@@ -1,0 +1,57 @@
+// =============================================
+// CustomToggleInput !
+// =============================================
+
+
+
+
+.ea-custom-toggle-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+
+
+    .ea-label {
+        font-size: 12px;
+        font-weight: 150px !important;
+         color: #1e1e1e;
+    }
+     .ea-field {
+        .components-form-toggle {
+            .components-form-toggle__input:focus+.components-form-toggle__track {
+                outline: none !important;
+                box-shadow: none !important; // এটি সেই মোটা আউটলাইনটি সরাবে
+            }
+
+            // ১. টগলের ট্র্যাক (পিছনের অংশ)
+            .components-form-toggle__track {
+                background-color: #c8c8c8 !important;
+                border: 1px solid #dedede !important;
+                transition: background-color 0.2s ease;
+            }
+
+            // ২. টগলের থাম্ব (গোল অংশটি)
+            .components-form-toggle__thumb {
+                background-color: #ffffff !important; // একদম সাদা
+                border: none !important; // কোনো বর্ডার থাকবে না
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important; // হালকা শ্যাডো যাতে সাদা থাম্বটি ফুটে ওঠে
+                top: 2px; // পজিশন ঠিক করার জন্য
+                left: 2px;
+            }
+
+            // ৩. যখন টগলটি অন (Checked) থাকবে তখন আপনার অরেঞ্জ কালার
+            &.is-checked {
+                .components-form-toggle__track {
+                    background-color: var(--ea-primary-orange) !important;
+                    border-color: var(--ea-primary-orange) !important;
+                }
+            }
+        }
+
+        // বাড়তি মার্জিন রিমুভ করা
+        .components-base-control__field {
+            margin-bottom: 0 !important;
+        }
+    }
+}

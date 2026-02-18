@@ -1,0 +1,39 @@
+
+:root {
+    --ea-primary-orange: #FF5B2E;
+    --ea-gradient-orange: linear-gradient(90deg, #FF4B4B 0%, #FF9021 100%);
+     --wp-components-color-accent: var(--ea-primary-orange);
+     --wp-components-color-gray-600:#c4c4c4
+}
+
+
+// all ToggleGroupControl style for color change and transition effect just use this name as class name !
+.ea-custom-toggle {
+    &.components-toggle-group-control {
+        &::before {
+            background: var(--ea-primary-orange) !important;
+            border-radius: 2px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .components-toggle-group-control-option-base {
+            &[aria-checked="true"] {
+                color: white !important;
+                background: transparent !important;
+                
+                * {
+                    color: white !important;
+                }
+            }
+            
+            transition: color 0.3s ease !important;
+        }
+    }
+}
+// it has in multiple places so i put it in variable file for better management and reuse 
+@keyframes spin-once {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+ 

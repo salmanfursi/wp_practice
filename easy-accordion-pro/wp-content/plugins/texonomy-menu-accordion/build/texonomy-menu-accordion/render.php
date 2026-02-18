@@ -1,88 +1,79 @@
 <?php
-/**
- * PHP Render logic for Taxonomy Menu Accordion
- * ব্যবহার করা হয়েছে: Closures (Anonymous Functions) এবং Recursion
- */
-
-// ১. ডাটাবেস থেকে সব ক্যাটাগরি (Terms) নিয়ে আসা
-// আমরা একবারে সব ডাটা নিয়ে আসছি যাতে বারবার ডাটাবেসে হিট করতে না হয় (Performance)
 $all_categories = get_terms( array(
-    'taxonomy'   => 'category', // আপনি চাইলে এখানে আপনার কাস্টম ট্যাক্সোনমি দিতে পারেন
+    'taxonomy'   => 'category',
     'hide_empty' => false,
 ) );
 
 if ( is_wp_error( $all_categories ) || empty( $all_categories ) ) {
-    echo 'No categories found.';
+    echo '<p>No categories found.</p>';
     return;
 }
 
-/**
- * ২. ট্রি বিল্ডার (Tree Builder) - Closure + Recursion
- * এই ফাংশনটি ফ্ল্যাট ডাটাকে 'Parent-Child' ফরমেটে সাজাবে।
- */
-$build_category_tree = function( array &$elements, $parentId = 0 ) use ( &$build_category_tree ) {
+// Recursive function to build the tree
+$build_tree = function( array $elements, $parentId = 0 ) use ( &$build_tree ) {
     $branch = array();
-
     foreach ( $elements as $element ) {
         if ( $element->parent == $parentId ) {
-            // রিকার্শন: এই ক্যাটাগরির কোনো চাইল্ড আছে কি না তা চেক করতে নিজেকে আবার কল করছে
-            $children = $build_category_tree( $elements, $element->term_id );
-            
-            if ( $children ) {
-                $element->children = $children;
+            $children = $build_tree( $elements, $element->term_id );
+            $totalDeepCount = 0;
+            foreach ( $children as $child ) {
+                $totalDeepCount += 1 + ( isset( $child->totalDeepCount ) ? $child->totalDeepCount : 0 );
             }
+            $element->children = $children;
+            $element->totalDeepCount = $totalDeepCount;
             $branch[] = $element;
         }
     }
     return $branch;
 };
 
-// ডাটা প্রসেস করে ট্রি তৈরি করা
-$nested_categories = $build_category_tree( $all_categories );
+// CRITICAL: Define tree_data here
+$tree_data = $build_tree( $all_categories );
 
-/**
- * ৩. এইচটিএমএল রেন্ডারার (HTML Renderer) - Closure + Recursion
- * এই ফাংশনটি নেস্টেড ট্রি থেকে অ্যাকর্ডিয়ন এইচটিএমএল তৈরি করবে।
- */
-$render_accordion_html = function( $items ) use ( &$render_accordion_html ) {
+// Recursive function to render the HTML
+$render_list = function( $items ) use ( &$render_list ) {
     if ( empty( $items ) ) return '';
-
     $html = '<ul class="ea-accordion-list">';
     
     foreach ( $items as $item ) {
         $has_children = ! empty( $item->children );
         
-        // লিস্ট আইটেম তৈরি
-        $html .= '<li class="ea-item ' . ( $has_children ? 'has-children' : '' ) . '">';
+        // INTERACTIVITY API: Each <li> gets its own context (closure)
+        $html .= '<li class="ea-item" 
+                    data-wp-context=\'{ "isOpen": false }\' 
+                    data-wp-class--is-open="context.isOpen">';
         
-        // হেডার অংশ (টাইটেল এবং আইকন)
-        $html .= '<div class="ea-item-header">';
+        $html .= '<div class="ea-item-header" ' . ($has_children ? 'data-wp-on--click="actions.toggle"' : '') . '>';
+        $html .= '<span class="ea-title">';
         $html .= '<a href="' . esc_url( get_term_link( $item ) ) . '">' . esc_html( $item->name ) . '</a>';
         
+        if ( $has_children && $item->totalDeepCount > 0 ) {
+            $html .= '<span class="sub-count">(' . $item->totalDeepCount . ')</span>';
+        }
+        $html .= '</span>';
+        
         if ( $has_children ) {
-            // যদি চাইল্ড থাকে তবে একটি টগল আইকন যোগ করা
-            $html .= '<span class="ea-toggle-icon">▼</span>'; 
+            $html .= '<span class="ea-icon-wrapper">';
+            $html .= '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2"/></svg>';
+            $html .= '</span>';
         }
         $html .= '</div>';
-
-        // রিকার্শন: যদি চাইল্ড থাকে, তবে সাব-মেনু তৈরি করা
+        
         if ( $has_children ) {
-            $html .= '<div class="ea-submenu" style="display: none;">';
-            $html .= $render_accordion_html( $item->children ); 
+            // INTERACTIVITY API: Bind visibility to context state
+            $html .= '<div class="ea-submenu" data-wp-bind--hidden="!context.isOpen">';
+            $html .= $render_list( $item->children );
             $html .= '</div>';
         }
-
         $html .= '</li>';
     }
-    
     $html .= '</ul>';
     return $html;
 };
-
 ?>
 
-<div <?php echo get_block_wrapper_attributes(); ?>>
-    <div class="easy-accordion-pro-container">
-        <?php echo $render_accordion_html( $nested_categories ); ?>
+<div <?php echo get_block_wrapper_attributes(); ?> data-wp-interactive="create-block/texonomy-menu-accordion">
+    <div class="ea-main-container">
+        <?php echo $render_list( $tree_data ); ?>
     </div>
 </div>

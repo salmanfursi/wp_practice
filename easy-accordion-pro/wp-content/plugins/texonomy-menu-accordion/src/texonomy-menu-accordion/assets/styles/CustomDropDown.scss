@@ -1,0 +1,109 @@
+
+// =============================================
+// custom dropdown !
+// =============================================
+.components-combobox-control {
+    .components-form-token-field__suggestions-list {
+        box-shadow: inset 0 1px 0 0 var(--ea-primary-orange) !important;
+    }
+
+    .components-form-token-field__suggestion.is-selected {
+        background: var(--ea-primary-orange) !important;
+        color: #fff !important;
+    }
+
+    // Arrow transition
+    .custom-dropdown-icon svg {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: center;
+    }
+
+    // ✅ Rotate when expanded - using :has() on parent Flex
+    .components-flex:has(.components-combobox-control__input[aria-expanded="true"]) {
+        .custom-dropdown-icon svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+//text styel 
+.components-base-control 
+ .components-base-control__label.components-base-control__label {
+    font-size: 12px !important; // আপনার ইনস্পেক্টরের রিকোয়ারমেন্ট অনুযায়ী
+    font-weight: 300 !important; // একদম পাতলা লুকের জন্য
+    line-height: 1.4 !important;
+    text-transform: none !important; // আপারকেস রিমুভ করা হয়েছে
+    margin-bottom: 8px !important;
+    display: block;
+    color: #3c434a !important;
+}
+
+.ea-dropdown-wrapper {
+
+
+    .custom-dropdown-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+
+        svg {
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    }
+
+}
+
+//  for the inline version of dropdown used in order li emean the horizontall one 
+.ea-dropdown-inline {
+    .components-base-control__field {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .components-base-control__label {
+        font-size: 12px !important; // ✅ ১১ পিক্সেল করা হয়েছে
+        font-weight: 200 !important; // ✅ ০ এর বদলে ২০০ (সবচেয়ে হালকা) করা হয়েছে
+        margin-bottom: 0 !important;
+        white-space: nowrap;
+        min-width: 80px;
+        flex-shrink: 0;
+        text-transform: none !important; // ✅ বোল্ডনেস কমাতে আপারকেস বন্ধ করা হয়েছে
+    }
+
+    .components-combobox-control__suggestions-container {
+        flex: 1;
+        position: relative;
+    }
+
+    // ✅ Suggestions list styling
+    .components-form-token-field__suggestions-list {
+        background-color: white !important;
+        border: 1px solid var(--ea-primary-orange) !important;
+        box-shadow: inset 0 1px 0 0 var(--ea-primary-orange) !important;
+        position: absolute !important;
+        z-index: 999999 !important;
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    // ✅ Selected item
+    .components-form-token-field__suggestion.is-selected {
+        background: var(--ea-primary-orange) !important;
+        color: #fff !important;
+    }
+
+    // ✅ Lift combobox when expanded
+    .components-combobox-control {
+        position: relative;
+        z-index: 1000;
+    }
+
+    .components-combobox-control:has(.components-combobox-control__input[aria-expanded="true"]) {
+        z-index: 999999;
+    }
+}
+

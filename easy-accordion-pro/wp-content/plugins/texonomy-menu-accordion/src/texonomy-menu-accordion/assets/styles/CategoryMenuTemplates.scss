@@ -1,0 +1,112 @@
+// all the scss of the category menu templates !
+
+@import './CustomToggleInput.scss';
+@import './CustomDropdown.scss';
+@import './RowRangeInput.scss';
+
+// =============================================
+// Template Slider Component Styles
+// =============================================
+// Slider Wrapper
+.ea-template-slider {
+    margin-bottom: 20px;
+
+    &__wrapper {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f5;
+        padding: 10px 40px;
+        margin-bottom: 12px;
+
+    }
+}
+ 
+// Template Image
+.ea-template-slider__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+}
+
+.ea-template-slider__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 18px;
+    transition: background 0.3s ease, color 0.3s ease;
+
+    // Default state (both buttons)
+    background: white;
+    color: #555;
+    border: 1px solid #ddd;
+
+    // ✅ Hover = orange for BOTH buttons
+    &:hover {
+        background: var(--ea-primary-orange) !important;
+        color: white !important;
+        border-color: transparent !important;
+    }
+
+    // ✅ Active (last clicked) = orange
+    &--active {
+        background: var(--ea-primary-orange) !important;
+        color: white !important;
+        border-color: transparent !important;
+    }
+
+    // Prev position
+    &--prev {
+        left: 5px;
+    }
+
+    // Next position
+    &--next {
+        right: 5px;
+    }
+}
+
+// Dot Navigation
+.ea-template-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    // margin-top: 10px;
+}
+
+.ea-template-slider__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease;
+    background: #ccc;
+
+    // Active dot
+    &--active {
+        background: var(--ea-primary-orange);
+    }
+
+    &:hover {
+        background: var(--ea-primary-orange);
+        opacity: 0.8;
+    }
+}
+
+
+ 

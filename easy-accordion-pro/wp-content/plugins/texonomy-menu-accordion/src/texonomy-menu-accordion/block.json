@@ -9,20 +9,19 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"interactivity": true
 	},
 	"attributes": {
-        "taxonomy": {
-            "type": "string",
-            "default": "category"
-        }
-    },
+		"taxonomy": {
+			"type": "string",
+			"default": "category"
+		}
+	},
 	"textdomain": "texonomy-menu-accordion",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"render": "file:./render.php",
-	"viewScript": "file:./view.js"
+	"viewScriptModule": "file:./view.js"
 }
-
-

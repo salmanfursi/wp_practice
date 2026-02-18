@@ -14,7 +14,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'interactivity' => true
 		),
 		'attributes' => array(
 			'taxonomy' => array(
@@ -27,6 +28,6 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',
-		'viewScript' => 'file:./view.js'
+		'viewScriptModule' => 'file:./view.js'
 	)
 );
