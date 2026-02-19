@@ -1,135 +1,82 @@
-// import { Icon, chevronDown } from '@wordpress/icons';  
-
-
-// const renderList = (items,openItems={}, toggleItem) => {
-//  if (!items || !Array.isArray(items) || items.length === 0) return null;
-// 		return (
-// 			<ul className="ea-editor-preview-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-// 				{items.map((item) => {
-// 					const hasSub = item.children && item.children.length > 0;
-// 					const isOpen = !!openItems[item.id];
-
-// 					return (
-// 						<li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`}>
-// 							<div
-// 								className="ea-item-header"
-// 								onClick={(e) => {
-// 									if (hasSub) {
-// 										e.preventDefault();
-// 										toggleItem(item.id);
-// 									}
-// 								}}
-// 								onKeyDown={(e) => {
-// 									if (e.key === 'Enter' || e.key === ' ') {
-// 										toggleItem(item.id);
-// 									}
-// 								}}
-// 								role="button"
-// 								tabIndex="0"
-// 								style={{
-// 									cursor: hasSub ? 'pointer' : 'default',
-// 									display: 'flex',
-// 									justifyContent: 'space-between',
-// 									alignItems: 'center',
-// 									padding: '10px',
-//   								}}
-// 							>
-// 								<span className="ea-title" >
-// 									{ /* If item.name exists use it (Category), otherwise use item.title.rendered (Menu) */}
-// 									{item.name || item.title?.rendered}
-
-// 									{hasSub && item.totalDeepCount > 0 && (
-// 										<span className="sub-count">({item.totalDeepCount})</span>
-// 									)}
-// 								</span>
-
-// 								{hasSub && (
-// 									<span className={`ea-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
-// 										<Icon icon={chevronDown} size={24} />
-// 									</span>
-// 								)}
-// 							</div>
-
-// 							{hasSub && isOpen && (
-// 								<div className="ea-editor-submenu" style={{ paddingLeft: '20px', background: '#c4c0c0'}}>
-// 									{renderList(item.children, openItems, toggleItem)}
-// 								</div>
-// 							)}
-// 						</li>
-// 					);
-// 				})}
-// 			</ul>
-// 		);
-// 	};
-//     export default renderList
 
 
 
+import { Icon, chevronDown, category } from '@wordpress/icons';
 
-import { Icon, chevronDown } from '@wordpress/icons';
+const renderList = (items, openItems = {}, toggleItem, template = 0, depth = 0) => {
+	//                                                     ↑ template    ↑ depth
+	if (!items || !Array.isArray(items) || items.length === 0) return null;
 
-const renderList = (items, openItems = {}, toggleItem, template = 0) => {
-    if (!items || !Array.isArray(items) || items.length === 0) return null;
+	// ✅ Add template class only at depth 0
+	const templateClass = depth === 0 ? `ea-template-${template + 1}` : '';
 
-    // ✅ Define template class names
-    const templateClass = `ea-template-${template + 1}`; // template-1, template-2, template-3
+	return (
+		<ul className={`ea-editor-preview-list ${templateClass}`} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+			{items.map((item) => {
+				const hasSub = item.children && item.children.length > 0;
+				const isOpen = !!openItems[item.id];
 
-    return (
-        <ul className={`ea-editor-preview-list ${templateClass}`} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {items.map((item) => {
-                const hasSub = item.children && item.children.length > 0;
-                const isOpen = !!openItems[item.id];
+				return (
+					<li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`}>
+						<div
+							className="ea-item-header"
+							onClick={(e) => {
+								if (hasSub) {
+									e.preventDefault();
+									toggleItem(item.id);
+								}
+							}}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									toggleItem(item.id);
+								}
+							}}
+							role="button"
+							tabIndex="0"
+							style={{
+								cursor: hasSub ? 'pointer' : 'default',
+								display: 'flex',
+								justifyContent: 'space-between',
+								alignItems: 'center',
+								padding: '10px',
+							}}
+						>
+							<span className="ea-title">
+								{/* ✅ Show icon only at depth 0 */}
+								{/* {depth === 0 && (
+									<Icon icon={category} size={18} className="ea-category-icon" />
+								)} */}
 
-                return (
-                    <li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`}>
-                        <div
-                            className="ea-item-header"
-                            onClick={(e) => {
-                                if (hasSub) {
-                                    e.preventDefault();
-                                    toggleItem(item.id);
-                                }
-                            }}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                    toggleItem(item.id);
-                                }
-                            }}
-                            role="button"
-                            tabIndex="0"
-                            style={{
-                                cursor: hasSub ? 'pointer' : 'default',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '10px',
-                            }}
-                        >
-                            <span className="ea-title">
-                                {item.name || item.title?.rendered}
-                                {hasSub && item.totalDeepCount > 0 && (
-                                    <span className="sub-count">({item.totalDeepCount})</span>
-                                )}
-                            </span>
+{depth === 0 && template !== 0 && (
+        <Icon icon={category} size={18} className="ea-category-icon" />
+    )}
 
-                            {hasSub && (
-                                <span className={`ea-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
-                                    <Icon icon={chevronDown} size={24} />
-                                </span>
-                            )}
-                        </div>
+								{item.name || item.title?.rendered}
+							</span>
 
-                        {hasSub && isOpen && (
-                            <div className="ea-editor-submenu" style={{ paddingLeft: '20px' }}>
-                                {/* ✅ Recursively pass template */}
-                                {renderList(item.children, openItems, toggleItem, template)}
-                            </div>
-                        )}
-                    </li>
-                );
-            })}
-        </ul>
-    );
+							{hasSub && (
+								<div className="ea-header-right">
+									{item.totalDeepCount > 0 && (
+										<span className="sub-count">{item.totalDeepCount}</span>
+									)}
+									<span className={`ea-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
+										<Icon icon={chevronDown} size={30} />
+									</span>
+								</div>
+							)}
+						</div>
+
+						{hasSub && isOpen && (
+							<div className="ea-editor-submenu" style={{ paddingLeft: '20px' }}>
+								{/* ✅ Pass template and increment depth */}
+								{renderList(item.children, openItems, toggleItem, template, depth + 1)}
+							</div>
+						)}
+					</li>
+				);
+			})}
+		</ul>
+	);
 };
 
 export default renderList;

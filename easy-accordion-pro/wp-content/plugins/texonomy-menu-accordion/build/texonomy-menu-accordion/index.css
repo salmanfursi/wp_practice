@@ -265,37 +265,35 @@
   margin-bottom: 20px;
 }
 .ea-template-slider__wrapper {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   background: #f5f5f5;
-  padding: 10px 40px;
+  padding: 4px;
   margin-bottom: 12px;
 }
 .ea-template-slider__image {
-  width: 100%;
+  max-width: 60% !important;
+  flex: 1;
   height: auto;
   display: block;
   border-radius: 2px;
 }
 .ea-template-slider__btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 1;
   font-size: 18px;
   transition: background 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
   background: white;
   color: #555;
   border: 1px solid #ddd;
@@ -309,12 +307,6 @@
   background: var(--ea-primary-orange) !important;
   color: white !important;
   border-color: transparent !important;
-}
-.ea-template-slider__btn--prev {
-  left: 5px;
-}
-.ea-template-slider__btn--next {
-  right: 5px;
 }
 .ea-template-slider__dots {
   display: flex;
@@ -338,15 +330,12 @@
   background: var(--ea-primary-orange);
   opacity: 0.8;
 }
-/* Target the root block wrapper to ensure it centers in the editor */
+/* Target the root block wrapper */
 [data-type="create-block/texonomy-menu-accordion"] {
   margin-top: 0 !important;
-  /* Removes top margin */
   margin-bottom: 0 !important;
-  /* Removes bottom margin */
   display: flex;
   justify-content: center;
-  /* This centers the box inside the 750px wide container */
   width: 350px;
 }
 .ea-main-editor-container {
@@ -354,62 +343,125 @@
   max-width: 450px;
   padding: 2px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  font-family: sans-serif;
   border: 0 !important;
-  /* Clean Underline Styling */
+  font-family: Roboto;
+  /* ============================================= */
+  /* BASE STYLES */
+  /* ============================================= */
 }
 .ea-main-editor-container .ea-editor-preview-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item {
-  /* Parent: Light Gray */
-}
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header {
-  background: #ebebeb;
-  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgb(155, 155, 155);
+  cursor: pointer;
 }
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-title {
-  font-size: 18px;
-  color: #333;
-  /* Child count in parentheses */
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: #2F2F2F;
 }
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-title .sub-count {
-  color: #888;
-  margin-left: 5px;
-  font-weight: normal;
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-title .ea-category-icon {
+  flex-shrink: 0;
+  color: #2F2F2F;
 }
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-icon-wrapper {
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-header-right .sub-count {
+  color: #2F2F2F;
+  font-weight: 400;
+  font-size: 16px;
+}
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-header-right .ea-icon-wrapper {
   display: flex;
   align-items: center;
   transition: transform 0.3s ease;
-  /* এটিই ম্যাজিক */
-  color: #666;
+  color: #2F2F2F;
 }
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-icon-wrapper.is-open {
+.ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-item-header .ea-header-right .ea-icon-wrapper.is-open {
   transform: rotate(-180deg);
-  /* ক্লিক করলে অ্যারো ঘুরে যাবে */
-}
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item:last-child > .ea-item-header {
-  border-bottom: none;
-}
-.ea-main-editor-container .ea-editor-preview-list .ea-editor-item {
-  /* Child: Darker Gray Shade */
 }
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-editor-submenu .ea-item-header {
-  background: transparent;
   padding-left: 40px;
-  /* Indent child items */
-  border-bottom: 1px solid #828282;
 }
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-editor-submenu .ea-item-header .ea-title {
-  font-size: 14px;
-  color: #555;
+  font-size: 16px;
+  font-weight: 400;
+}
+.ea-main-editor-container .ea-editor-preview-list {
+  /* ============================================= */
+  /* TEMPLATE 1 - Light Header, Dark Children BG */
+  /* ============================================= */
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item > .ea-item-header {
+  background: #f1f1f1;
+  border-bottom: 1px solid #CCCCCC;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item .ea-editor-submenu {
+  background: #DDDDDD;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item .ea-editor-submenu .ea-item-header {
+  background: transparent;
+  border-bottom: 1px solid #CCC;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item .ea-editor-submenu .ea-item-header .ea-title svg {
+  display: none;
+}
+.ea-main-editor-container .ea-editor-preview-list {
+  /* ============================================= */
+  /* TEMPLATE 2 - Icon Left, White BG, Borders Only on Parents */
+  /* ============================================= */
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-item-header {
+  background: #FFFFFF;
+  border-bottom: none;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item > .ea-item-header {
+  border-bottom: 2px solid #CCCCCC;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-editor-submenu {
+  background: transparent;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-editor-submenu .ea-item-header {
+  background: #FFFFFF;
+  border-bottom: none;
+  padding-left: 40px;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-editor-submenu .ea-item-header .ea-title {
+  flex-direction: row;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-editor-submenu .ea-editor-submenu .ea-item-header {
+  padding-left: 60px;
+}
+.ea-main-editor-container .ea-editor-preview-list {
+  /* ============================================= */
+  /* TEMPLATE 3 - Icon Left, Light Gray BG, Dash Children, Spacing */
+  /* ============================================= */
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item {
+  margin-bottom: 8px;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item:last-child {
+  margin-bottom: 0;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item > .ea-item-header {
+  background: #efeeee;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item .ea-editor-submenu {
+  background: #efeeee;
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item .ea-editor-submenu .ea-title::before {
+  content: "- ";
 }
 /* ১. প্যানেল হেডার সেটিংস */
 .block-editor-inserter__panel-header {

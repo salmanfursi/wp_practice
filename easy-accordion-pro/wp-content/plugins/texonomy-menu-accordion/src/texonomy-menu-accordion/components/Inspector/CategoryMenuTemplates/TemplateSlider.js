@@ -1,3 +1,5 @@
+
+
 import { useState } from '@wordpress/element';
 
 import template1 from '../../../assets/images/template_1.svg';
@@ -35,8 +37,8 @@ const TemplateSlider = ({ value, onChange }) => {
 
     return (
         <div className="ea-template-slider">
+            {/* ✅ Flex wrapper: button → image → button */}
             <div className="ea-template-slider__wrapper">
-
                 {/* Previous Button */}
                 <button
                     className={`ea-template-slider__btn ea-template-slider__btn--prev ${
@@ -65,7 +67,6 @@ const TemplateSlider = ({ value, onChange }) => {
                 >
                     ›
                 </button>
-
             </div>
 
             {/* Dot Navigation */}

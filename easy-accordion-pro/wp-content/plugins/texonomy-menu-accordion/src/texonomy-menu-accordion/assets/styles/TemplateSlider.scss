@@ -1,0 +1,84 @@
+
+
+.ea-template-slider {
+    margin-bottom: 20px;
+
+    &__wrapper {
+        // ✅ Flex layout: button → image → button
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4px;
+        
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #f5f5f5;
+        padding: 4px;
+        margin-bottom: 12px;
+    }
+
+    &__image {
+        max-width: 60% !important;
+        flex: 1; // Image takes remaining space
+         height: auto;
+        display: block;
+        border-radius: 2px;
+    }
+
+    &__btn {
+        // ✅ Buttons no longer absolute
+        position: relative;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 18px;
+        transition: background 0.3s ease, color 0.3s ease;
+        flex-shrink: 0; // Buttons don't shrink
+
+        background: white;
+        color: #555;
+        border: 1px solid #ddd;
+
+        &:hover {
+            background: var(--ea-primary-orange) !important;
+            color: white !important;
+            border-color: transparent !important;
+        }
+
+        &--active {
+            background: var(--ea-primary-orange) !important;
+            color: white !important;
+            border-color: transparent !important;
+        }
+    }
+
+    &__dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    &__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: background 0.3s ease;
+        background: #ccc;
+
+        &--active {
+            background: var(--ea-primary-orange);
+        }
+
+        &:hover {
+            background: var(--ea-primary-orange);
+            opacity: 0.8;
+        }
+    }
+}
