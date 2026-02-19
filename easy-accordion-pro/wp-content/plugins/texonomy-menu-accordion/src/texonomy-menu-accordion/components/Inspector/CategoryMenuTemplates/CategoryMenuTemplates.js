@@ -56,6 +56,7 @@ const CategoryMenuTemplates = ({ attributes, setAttributes }) => {
                 onChange={(val) => setAttributes({ template: val })}
             />
 
+
             <RowRangeInput
                 label="Item Gap"
                 value={attributes.itemGap || 16}
@@ -90,7 +91,7 @@ const CategoryMenuTemplates = ({ attributes, setAttributes }) => {
                         label="Categories to Show"
                         value={attributes.catShow || 'all'}
                         onChange={(val) => setAttributes({ catShow: val })}
-                        options={[
+                        options={[ 
                             { value: 'all', label: 'All' },
                             { value: 'specific', label: 'Specific' },
                             { value: 'exclude', label: 'Exclude' },

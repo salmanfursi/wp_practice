@@ -21,6 +21,10 @@ return array(
 			'taxonomy' => array(
 				'type' => 'string',
 				'default' => 'category'
+			),
+			'template' => array(
+				'type' => 'number',
+				'default' => 0
 			)
 		),
 		'textdomain' => 'texonomy-menu-accordion',

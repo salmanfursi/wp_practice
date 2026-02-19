@@ -1421,12 +1421,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/chevron-down.mjs");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+// import { Icon, chevronDown } from '@wordpress/icons';  
+
+// const renderList = (items,openItems={}, toggleItem) => {
+//  if (!items || !Array.isArray(items) || items.length === 0) return null;
+// 		return (
+// 			<ul className="ea-editor-preview-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+// 				{items.map((item) => {
+// 					const hasSub = item.children && item.children.length > 0;
+// 					const isOpen = !!openItems[item.id];
+
+// 					return (
+// 						<li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`}>
+// 							<div
+// 								className="ea-item-header"
+// 								onClick={(e) => {
+// 									if (hasSub) {
+// 										e.preventDefault();
+// 										toggleItem(item.id);
+// 									}
+// 								}}
+// 								onKeyDown={(e) => {
+// 									if (e.key === 'Enter' || e.key === ' ') {
+// 										toggleItem(item.id);
+// 									}
+// 								}}
+// 								role="button"
+// 								tabIndex="0"
+// 								style={{
+// 									cursor: hasSub ? 'pointer' : 'default',
+// 									display: 'flex',
+// 									justifyContent: 'space-between',
+// 									alignItems: 'center',
+// 									padding: '10px',
+//   								}}
+// 							>
+// 								<span className="ea-title" >
+// 									{ /* If item.name exists use it (Category), otherwise use item.title.rendered (Menu) */}
+// 									{item.name || item.title?.rendered}
+
+// 									{hasSub && item.totalDeepCount > 0 && (
+// 										<span className="sub-count">({item.totalDeepCount})</span>
+// 									)}
+// 								</span>
+
+// 								{hasSub && (
+// 									<span className={`ea-icon-wrapper ${isOpen ? 'is-open' : ''}`}>
+// 										<Icon icon={chevronDown} size={24} />
+// 									</span>
+// 								)}
+// 							</div>
+
+// 							{hasSub && isOpen && (
+// 								<div className="ea-editor-submenu" style={{ paddingLeft: '20px', background: '#c4c0c0'}}>
+// 									{renderList(item.children, openItems, toggleItem)}
+// 								</div>
+// 							)}
+// 						</li>
+// 					);
+// 				})}
+// 			</ul>
+// 		);
+// 	};
+//     export default renderList
 
 
-const renderList = (items, openItems = {}, toggleItem) => {
+
+const renderList = (items, openItems = {}, toggleItem, template = 0) => {
   if (!items || !Array.isArray(items) || items.length === 0) return null;
+
+  // ✅ Define template class names
+  const templateClass = `ea-template-${template + 1}`; // template-1, template-2, template-3
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-    className: "ea-editor-preview-list",
+    className: `ea-editor-preview-list ${templateClass}`,
     style: {
       listStyle: 'none',
       padding: 0,
@@ -1475,10 +1543,9 @@ const renderList = (items, openItems = {}, toggleItem) => {
         }), hasSub && isOpen && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "ea-editor-submenu",
           style: {
-            paddingLeft: '20px',
-            background: '#c4c0c0'
+            paddingLeft: '20px'
           },
-          children: renderList(item.children, openItems, toggleItem)
+          children: renderList(item.children, openItems, toggleItem, template)
         })]
       }, item.id);
     })
@@ -1513,20 +1580,109 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_renderList__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/renderList */ "./src/texonomy-menu-accordion/components/renderList.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+// import { __ } from '@wordpress/i18n';
+// import { useBlockProps } from '@wordpress/block-editor';
+// import { useSelect } from '@wordpress/data';
+// import { Spinner, Placeholder } from '@wordpress/components';
+// import { useState } from '@wordpress/element';
+// import './editor.scss';
+// import { Icon, chevronDown } from '@wordpress/icons'; // chevronDown ইম্পোর্ট করুন
+// import Inspector from './components/Inspector/inspector';
+// import renderList from './components/renderList';
+// export default function Edit(props) {
+// 	const blockProps = useBlockProps();
+
+// 	// ১. স্টেট ম্যানেজমেন্ট (এডিটর ইন্টারঅ্যাক্টিভিটি)
+// 	const [openItems, setOpenItems] = useState({});
+
+// 	const toggleItem = (id) => {
+// 		setOpenItems((prev) => ({
+// 			...prev,
+// 			[id]: !prev[id],
+// 		}));
+// 	};
+
+// 	// ২. ওয়ার্ডপ্রেস ডাটাবেস থেকে ক্যাটাগরি ডাটা নিয়ে আসা
+// 	const { categories, isResolving } = useSelect((select) => {
+// 		const query = { per_page: -1, hide_empty: false };
+// 		const { getEntityRecords, isResolving: checkResolving } = select('core');
+
+// 		return {
+// 			categories: getEntityRecords('taxonomy', 'category', query),
+// 			isResolving: checkResolving('core', 'getEntityRecords', ['taxonomy', 'category',
+// 				query]),
+// 		};
+// 		// return {
+// 		// 	categories: getEntityRecords('postType', 'nav_menu_item', { per_page: -1 }),
+// 		// 	isResolving: checkResolving('core', 'getEntityRecords', ['postType', 'nav_menu_item', query]),
+// 		// };
+// 	}, []);
+
+// 	const buildTree = (list, parentId = 0) => {
+// 		// console.log('Building tree for parentId:', parentId);
+// 		if (!list || !Array.isArray(list)) return [];
+
+// 		return list
+// 			.filter((item) => item.parent === parentId)
+// 			.map((item) => {
+// 				const children = buildTree(list, item.id);
+
+// 				const totalDeepCount = children.reduce((acc, child) => {
+// 					return acc + 1 + (child.totalDeepCount || 0);
+// 				}, 0);
+
+// 				return {
+// 					...item,
+// 					children,
+// 					totalDeepCount,
+// 				};
+// 			});
+// 	};
+
+// 	// লোডিং অবস্থা চেক করা
+// 	if (isResolving) {
+// 		return (
+// 			<div {...blockProps}>
+// 				<Placeholder label={__('Taxonomy Menu Accordion', 'texonomy-menu-accordion')}>
+// 					<Spinner />
+// 					<p>{__('ডাটাবেস থেকে ক্যাটাগরি লোড হচ্ছে...', 'texonomy-menu-accordion')}</p>
+// 				</Placeholder>
+// 			</div>
+// 		);
+// 	}
+
+// 	const treeData = buildTree(categories);
+
+//  	return (
+// 		<div {...blockProps}>
+// 			<Inspector {...props} />
+// 			<div className="ea-main-editor-container" style={{ border: '1px solid #2c2c2c', borderRadius: '4px' }}>
+
+// 				{treeData.length > 0 ? (
+//                 // এখানে arguments হিসেবে ডেটা পাস করুন
+//                 renderList(treeData, openItems, toggleItem) 
+//             ) : (
+//                 <p style={{ padding: '20px' }}>{__('কোনো ক্যাটাগরি পাওয়া যায়নি।', 'texonomy-menu-accordion')}</p>
+//             )}
+// 			</div>
+// 		</div>
+// 	);
+// }
 
 
 
 
 
 
- // chevronDown ইম্পোর্ট করুন
+
 
 
 
 function Edit(props) {
+  const {
+    attributes
+  } = props;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
-
-  // ১. স্টেট ম্যানেজমেন্ট (এডিটর ইন্টারঅ্যাক্টিভিটি)
   const [openItems, setOpenItems] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({});
   const toggleItem = id => {
     setOpenItems(prev => ({
@@ -1534,8 +1690,6 @@ function Edit(props) {
       [id]: !prev[id]
     }));
   };
-
-  // ২. ওয়ার্ডপ্রেস ডাটাবেস থেকে ক্যাটাগরি ডাটা নিয়ে আসা
   const {
     categories,
     isResolving
@@ -1552,13 +1706,8 @@ function Edit(props) {
       categories: getEntityRecords('taxonomy', 'category', query),
       isResolving: checkResolving('core', 'getEntityRecords', ['taxonomy', 'category', query])
     };
-    // return {
-    // 	categories: getEntityRecords('postType', 'nav_menu_item', { per_page: -1 }),
-    // 	isResolving: checkResolving('core', 'getEntityRecords', ['postType', 'nav_menu_item', query]),
-    // };
   }, []);
   const buildTree = (list, parentId = 0) => {
-    // console.log('Building tree for parentId:', parentId);
     if (!list || !Array.isArray(list)) return [];
     return list.filter(item => item.parent === parentId).map(item => {
       const children = buildTree(list, item.id);
@@ -1572,15 +1721,13 @@ function Edit(props) {
       };
     });
   };
-
-  // লোডিং অবস্থা চেক করা
   if (isResolving) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       ...blockProps,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Placeholder, {
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Taxonomy Menu Accordion', 'texonomy-menu-accordion'),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('ডাটাবেস থেকে ক্যাটাগরি লোড হচ্ছে...', 'texonomy-menu-accordion')
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading categories...', 'texonomy-menu-accordion')
         })]
       })
     });
@@ -1597,12 +1744,12 @@ function Edit(props) {
         borderRadius: '4px'
       },
       children: treeData.length > 0 ?
-      // এখানে arguments হিসেবে ডেটা পাস করুন
-      (0,_components_renderList__WEBPACK_IMPORTED_MODULE_7__["default"])(treeData, openItems, toggleItem) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+      // ✅ Pass template attribute to renderList
+      (0,_components_renderList__WEBPACK_IMPORTED_MODULE_7__["default"])(treeData, openItems, toggleItem, attributes.template || 0) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
         style: {
           padding: '20px'
         },
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('কোনো ক্যাটাগরি পাওয়া যায়নি।', 'texonomy-menu-accordion')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No categories found.', 'texonomy-menu-accordion')
       })
     })]
   });
@@ -1812,7 +1959,7 @@ var chevron_down_default = /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTE
   \************************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/texonomy-menu-accordion","version":"0.1.0","title":"Menu Accordion","category":"easy-accordion-cat","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"interactivity":true},"attributes":{"taxonomy":{"type":"string","default":"category"}},"textdomain":"texonomy-menu-accordion","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScriptModule":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/texonomy-menu-accordion","version":"0.1.0","title":"Menu Accordion","category":"easy-accordion-cat","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"interactivity":true},"attributes":{"taxonomy":{"type":"string","default":"category"},"template":{"type":"number","default":0}},"textdomain":"texonomy-menu-accordion","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScriptModule":"file:./view.js"}');
 
 /***/ }
 

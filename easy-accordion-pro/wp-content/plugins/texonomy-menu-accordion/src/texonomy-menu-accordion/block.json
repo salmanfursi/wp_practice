@@ -16,6 +16,10 @@
 		"taxonomy": {
 			"type": "string",
 			"default": "category"
+		},
+		"template": {
+			"type": "number",
+			"default": 0
 		}
 	},
 	"textdomain": "texonomy-menu-accordion",

@@ -338,32 +338,6 @@
   background: var(--ea-primary-orange);
   opacity: 0.8;
 }
-/* ১. প্যানেল হেডার সেটিংস */
-.block-editor-inserter__panel-header {
-  display: flex !important;
-  align-items: start;
-  justify-content: flex-start;
-  /* টাইটেলের পাশে আইকন রাখার জন্য */
-}
-/* ২. টাইটেল এর ওপর আইকন বসানো (স্ক্রিনশট অনুযায়ী এই ক্লাসটিই কাজ করছে) */
-.block-editor-inserter__panel-title::after {
-  content: "";
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-left: 10px;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzExMzczXzIyNTEpIj4KPHBhdGggZD0iTTAuNTAwMDAxIDQuMDE1MTRDMC4yMjM4NTggNC4wMTUxNCAwIDQuMjM4OTkgMCA0LjUxNTE0VjExLjU0NTZDMCAxMS44MjE3IDAuMjIzODU4IDEyLjA0NTYgMC41IDEyLjA0NTZIMTUuNUMxNS43NzYyIDEyLjA0NTYgMTYgMTEuODIxNyAxNiAxMS41NDU2VjQuNTE1MTRDMTYgNC4yMzg5OSAxNS43NzYyIDQuMDE1MTQgMTUuNSA0LjAxNTE0SDAuNTAwMDAxWk0xNS4wMjY3IDEwLjUxMTRDMTUuMDI2NyAxMC43ODc1IDE0LjgwMjggMTEuMDExNCAxNC41MjY3IDExLjAxMTRIMS41MzQyMkMxLjI1ODA4IDExLjAxMTQgMS4wMzQyMiAxMC43ODc1IDEuMDM0MjIgMTAuNTExNFY3LjQ5NjEzQzEuMDM0MjIgNy4yMTk5OSAxLjI1ODA4IDYuOTk2MTMgMS41MzQyMiA2Ljk5NjEzSDE0LjUyNjdDMTQuODAyOCA2Ljk5NjEzIDE1LjAyNjcgNy4yMTk5OSAxNS4wMjY3IDcuNDk2MTNWMTAuNTExNFoiIGZpbGw9IiNGRjVCMkUiLz4KPHBhdGggZD0iTTAgMC41QzAgMC4yMjM4NTggMC4yMjM4NTggMCAwLjUgMEgxNS41QzE1Ljc3NjIgMCAxNiAwLjIyMzg1OCAxNiAwLjVWMi40ODFDMTYgMi43NTcxNCAxNS43NzYyIDIuOTgxIDE1LjUgMi45ODFIMC41MDAwMDFDMC4yMjM4NTggMi45ODEgMCAyLjc1NzE0IDAgMi40ODFWMC41WiIgZmlsbD0iI0ZGNUIyRSIvPgo8cGF0aCBkPSJNMCAxMy41MTlDMCAxMy4yNDI5IDAuMjIzODU4IDEzLjAxOSAwLjUgMTMuMDE5SDE1LjVDMTUuNzc2MiAxMy4wMTkgMTYgMTMuMjQyOSAxNiAxMy41MTlWMTUuNUMxNiAxNS43NzYyIDE1Ljc3NjIgMTYgMTUuNSAxNkgwLjUwMDAwMUMwLjIyMzg1OCAxNiAwIDE1Ljc3NjIgMCAxNS41VjEzLjUxOVoiIGZpbGw9IiNGRjVCMkUiLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xMTM3M18yMjUxIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=);
-  background-size: contain;
-  background-repeat: no-repeat;
-  vertical-align: middle;
-}
-/* ৩. ফিল্টার লজিক */
-/* যদি এই হেডারের পরের কন্টেন্টে EASY ACCORDION না থাকে, তবে আইকন মুছে দাও */
-/* :not(:has bole je jodi na thake then oita koro etc ! */
-.block-editor-inserter__panel-header:not(:has(+ .block-editor-inserter__panel-content [aria-label="EASY ACCORDION"])) .block-editor-inserter__panel-title::after {
-  display: none !important;
-  /* !important দিন যাতে অন্য স্টাইল একে বাধা না দেয় */
-}
 /* Target the root block wrapper to ensure it centers in the editor */
 [data-type="create-block/texonomy-menu-accordion"] {
   margin-top: 0 !important;
@@ -436,6 +410,32 @@
 .ea-main-editor-container .ea-editor-preview-list .ea-editor-item .ea-editor-submenu .ea-item-header .ea-title {
   font-size: 14px;
   color: #555;
+}
+/* ১. প্যানেল হেডার সেটিংস */
+.block-editor-inserter__panel-header {
+  display: flex !important;
+  align-items: start;
+  justify-content: flex-start;
+  /* টাইটেলের পাশে আইকন রাখার জন্য */
+}
+/* ২. টাইটেল এর ওপর আইকন বসানো (স্ক্রিনশট অনুযায়ী এই ক্লাসটিই কাজ করছে) */
+.block-editor-inserter__panel-title::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzExMzczXzIyNTEpIj4KPHBhdGggZD0iTTAuNTAwMDAxIDQuMDE1MTRDMC4yMjM4NTggNC4wMTUxNCAwIDQuMjM4OTkgMCA0LjUxNTE0VjExLjU0NTZDMCAxMS44MjE3IDAuMjIzODU4IDEyLjA0NTYgMC41IDEyLjA0NTZIMTUuNUMxNS43NzYyIDEyLjA0NTYgMTYgMTEuODIxNyAxNiAxMS41NDU2VjQuNTE1MTRDMTYgNC4yMzg5OSAxNS43NzYyIDQuMDE1MTQgMTUuNSA0LjAxNTE0SDAuNTAwMDAxWk0xNS4wMjY3IDEwLjUxMTRDMTUuMDI2NyAxMC43ODc1IDE0LjgwMjggMTEuMDExNCAxNC41MjY3IDExLjAxMTRIMS41MzQyMkMxLjI1ODA4IDExLjAxMTQgMS4wMzQyMiAxMC43ODc1IDEuMDM0MjIgMTAuNTExNFY3LjQ5NjEzQzEuMDM0MjIgNy4yMTk5OSAxLjI1ODA4IDYuOTk2MTMgMS41MzQyMiA2Ljk5NjEzSDE0LjUyNjdDMTQuODAyOCA2Ljk5NjEzIDE1LjAyNjcgNy4yMTk5OSAxNS4wMjY3IDcuNDk2MTNWMTAuNTExNFoiIGZpbGw9IiNGRjVCMkUiLz4KPHBhdGggZD0iTTAgMC41QzAgMC4yMjM4NTggMC4yMjM4NTggMCAwLjUgMEgxNS41QzE1Ljc3NjIgMCAxNiAwLjIyMzg1OCAxNiAwLjVWMi40ODFDMTYgMi43NTcxNCAxNS43NzYyIDIuOTgxIDE1LjUgMi45ODFIMC41MDAwMDFDMC4yMjM4NTggMi45ODEgMCAyLjc1NzE0IDAgMi40ODFWMC41WiIgZmlsbD0iI0ZGNUIyRSIvPgo8cGF0aCBkPSJNMCAxMy41MTlDMCAxMy4yNDI5IDAuMjIzODU4IDEzLjAxOSAwLjUgMTMuMDE5SDE1LjVDMTUuNzc2MiAxMy4wMTkgMTYgMTMuMjQyOSAxNiAxMy41MTlWMTUuNUMxNiAxNS43NzYyIDE1Ljc3NjIgMTYgMTUuNSAxNkgwLjUwMDAwMUMwLjIyMzg1OCAxNiAwIDE1Ljc3NjIgMCAxNS41VjEzLjUxOVoiIGZpbGw9IiNGRjVCMkUiLz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xMTM3M18yMjUxIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=);
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+/* ৩. ফিল্টার লজিক */
+/* যদি এই হেডারের পরের কন্টেন্টে EASY ACCORDION না থাকে, তবে আইকন মুছে দাও */
+/* :not(:has bole je jodi na thake then oita koro etc ! */
+.block-editor-inserter__panel-header:not(:has(+ .block-editor-inserter__panel-content [aria-label="EASY ACCORDION"])) .block-editor-inserter__panel-title::after {
+  display: none !important;
+  /* !important দিন যাতে অন্য স্টাইল একে বাধা না দেয় */
 }
 
 /*# sourceMappingURL=index.css.map*/
