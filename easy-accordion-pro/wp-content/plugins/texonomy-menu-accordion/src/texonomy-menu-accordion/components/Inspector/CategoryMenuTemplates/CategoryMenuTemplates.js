@@ -1,7 +1,6 @@
 
 import {
     PanelBody,
-    
     __experimentalToggleGroupControl as ToggleGroupControl,
     __experimentalToggleGroupControlOption as ToggleGroupControlOption
 } from '@wordpress/components';
@@ -56,10 +55,9 @@ const CategoryMenuTemplates = ({ attributes, setAttributes }) => {
                 onChange={(val) => setAttributes({ template: val })}
             />
 
-
             <RowRangeInput
                 label="Item Gap"
-                value={attributes.itemGap || 16}
+                value={attributes.itemGap}
                 onChange={(val) => setAttributes({ itemGap: val })}
                 min={0}
                 max={100}

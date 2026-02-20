@@ -22,7 +22,19 @@ return array(
 				'type' => 'string',
 				'default' => 'category'
 			),
+			'dataSource' => array(
+				'type' => 'string',
+				'default' => 'taxonomy'
+			),
 			'template' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'menuId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'itemGap' => array(
 				'type' => 'number',
 				'default' => 0
 			)

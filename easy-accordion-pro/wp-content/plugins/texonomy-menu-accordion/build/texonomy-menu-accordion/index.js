@@ -854,7 +854,7 @@ const CategoryMenuTemplates = ({
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_RowRangeInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
       label: "Item Gap",
-      value: attributes.itemGap || 16,
+      value: attributes.itemGap,
       onChange: val => setAttributes({
         itemGap: val
       }),
@@ -1550,27 +1550,102 @@ function Edit(props) {
   };
 
   // ২. ওয়ার্ডপ্রেস ডাটাবেস থেকে ক্যাটাগরি ডাটা নিয়ে আসা
+
+  const currentSource = attributes.dataSource || 'taxonomy';
+  const isTaxonomy = currentSource === 'taxonomy';
+  const isMenu = currentSource === 'menu';
   const {
-    categories,
+    data,
     isResolving
   } = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(select => {
-    const query = {
-      per_page: -1,
-      hide_empty: false
-    };
     const {
       getEntityRecords,
       isResolving: checkResolving
     } = select('core');
+
+    // 👉 TAXONOMY DATA (Working perfect ✅)
+    if (isTaxonomy) {
+      const query = {
+        per_page: -1,
+        hide_empty: false
+      };
+      return {
+        data: getEntityRecords('taxonomy', attributes.taxonomy || 'category', query),
+        isResolving: checkResolving('core', 'getEntityRecords', ['taxonomy', attributes.taxonomy || 'category', query])
+      };
+    }
+
+    // 👉 FIXED MENU DATA
+    if (isMenu) {
+      // Get ALL menu items first (no menu filter in REST API)
+      const query = {
+        per_page: -1
+      };
+      const allMenuItems = getEntityRecords('postType', 'nav_menu_item', query);
+
+      // Filter by your selected menu in normalizeData instead
+      return {
+        data: allMenuItems,
+        isResolving: checkResolving('core', 'getEntityRecords', ['postType', 'nav_menu_item', query])
+      };
+    }
     return {
-      categories: getEntityRecords('taxonomy', 'category', query),
-      isResolving: checkResolving('core', 'getEntityRecords', ['taxonomy', 'category', query])
+      data: [],
+      isResolving: false
     };
-    // return {
-    // 	categories: getEntityRecords('postType', 'nav_menu_item', { per_page: -1 }),
-    // 	isResolving: checkResolving('core', 'getEntityRecords', ['postType', 'nav_menu_item', query]),
-    // };
-  }, []);
+  }, [attributes.dataSource, attributes.taxonomy, attributes.menuId]); // ✅ Added menuId
+
+  const normalizeData = list => {
+    if (!list) return [];
+    if (isTaxonomy) {
+      return list.map(item => ({
+        id: item.id,
+        name: item.name || 'No name',
+        parent: item.parent ? parseInt(item.parent) : 0
+      }));
+    }
+
+    // ✅ FIXED: Filter by menu + parent validation
+    const idMap = list.reduce((acc, item) => {
+      acc[item.id] = true;
+      return acc;
+    }, {});
+    return list
+    // Filter by selected menu first
+    .filter(item => {
+      // Check if this menu item belongs to our selected menu
+      return !attributes.menuId || item.menus?.includes(attributes.menuId) || item.nav_menu_items?.some(menu => menu === attributes.menuId);
+    }).map(item => {
+      let parentId = parseInt(item.menu_item_parent || 0);
+
+      // Fallback: if parent doesn't exist, make top-level
+      if (parentId !== 0 && !idMap[parentId]) {
+        parentId = 0;
+      }
+      return {
+        id: item.id,
+        name: item.title?.rendered || item.title || 'No title',
+        parent: parentId
+      };
+    });
+  };
+
+  // --------------
+  // const { categories, isResolving } = useSelect((select) => {
+  // 	const query = { per_page: -1, hide_empty: false };
+  // 	const { getEntityRecords, isResolving: checkResolving } = select('core');
+
+  // 	return {
+  // 		categories: getEntityRecords('taxonomy', 'category', query),
+  // 		isResolving: checkResolving('core', 'getEntityRecords', ['taxonomy', 'category',
+  // 			query]),
+  // 	};
+  // 	// return {
+  // 	// 	categories: getEntityRecords('postType', 'nav_menu_item', { per_page: -1 }),
+  // 	// 	isResolving: checkResolving('core', 'getEntityRecords', ['postType', 'nav_menu_item', query]),
+  // 	// };
+  // }, []);
+
   const buildTree = (list, parentId = 0) => {
     // console.log('Building tree for parentId:', parentId);
     if (!list || !Array.isArray(list)) return [];
@@ -1599,7 +1674,10 @@ function Edit(props) {
       })
     });
   }
-  const treeData = buildTree(categories);
+
+  // const treeData = buildTree(categories);
+  const treeData = buildTree(normalizeData(data));
+  console.log('Normalized Menu Data:', normalizeData(data));
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Inspector_inspector__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -1608,7 +1686,8 @@ function Edit(props) {
       className: "ea-main-editor-container",
       style: {
         border: '1px solid #2c2c2c',
-        borderRadius: '4px'
+        borderRadius: '4px',
+        '--item-gap': `${attributes?.itemGap}px`
       },
       children: treeData.length > 0 ?
       // এখানে arguments হিসেবে ডেটা পাস করুন
@@ -1855,7 +1934,7 @@ var chevron_down_default = /* @__PURE__ */ (0,react_jsx_runtime__WEBPACK_IMPORTE
   \************************************************/
 (module) {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/texonomy-menu-accordion","version":"0.1.0","title":"Menu Accordion","category":"easy-accordion-cat","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"interactivity":true},"attributes":{"taxonomy":{"type":"string","default":"category"},"template":{"type":"number","default":0}},"textdomain":"texonomy-menu-accordion","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScriptModule":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/texonomy-menu-accordion","version":"0.1.0","title":"Menu Accordion","category":"easy-accordion-cat","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"interactivity":true},"attributes":{"taxonomy":{"type":"string","default":"category"},"dataSource":{"type":"string","default":"taxonomy"},"template":{"type":"number","default":0},"menuId":{"type":"string","default":""},"itemGap":{"type":"number","default":0}},"textdomain":"texonomy-menu-accordion","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScriptModule":"file:./view.js"}');
 
 /***/ }
 

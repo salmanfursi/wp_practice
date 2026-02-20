@@ -403,6 +403,12 @@
   /* TEMPLATE 1 - Light Header, Dark Children BG */
   /* ============================================= */
 }
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item {
+  margin-bottom: var(--item-gap, 0px);
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item:last-child {
+  margin-bottom: 0;
+}
 .ea-main-editor-container .ea-editor-preview-list.ea-template-1 .ea-editor-item > .ea-item-header {
   background: #f1f1f1;
   border-bottom: 1px solid #CCCCCC;
@@ -421,6 +427,9 @@
   /* ============================================= */
   /* TEMPLATE 2 - Icon Left, White BG, Borders Only on Parents */
   /* ============================================= */
+}
+.ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item {
+  margin-bottom: var(--item-gap, 0px);
 }
 .ea-main-editor-container .ea-editor-preview-list.ea-template-2 .ea-editor-item .ea-item-header {
   background: #FFFFFF;
@@ -449,7 +458,7 @@
   /* ============================================= */
 }
 .ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item {
-  margin-bottom: 8px;
+  margin-bottom: max(8px, var(--item-gap, 0px));
 }
 .ea-main-editor-container .ea-editor-preview-list.ea-template-3 > .ea-editor-item:last-child {
   margin-bottom: 0;

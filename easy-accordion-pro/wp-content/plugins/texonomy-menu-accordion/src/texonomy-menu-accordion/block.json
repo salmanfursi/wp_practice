@@ -17,7 +17,19 @@
 			"type": "string",
 			"default": "category"
 		},
+		"dataSource": {
+			"type": "string",
+			"default": "taxonomy"
+		},
 		"template": {
+			"type": "number",
+			"default": 0
+		},
+		"menuId": {
+			"type": "string",
+			"default": ""
+		},
+		"itemGap": {
 			"type": "number",
 			"default": 0
 		}

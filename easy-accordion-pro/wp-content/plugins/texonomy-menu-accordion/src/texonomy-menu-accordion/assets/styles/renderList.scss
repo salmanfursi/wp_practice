@@ -1,4 +1,3 @@
-
 /* Target the root block wrapper */
 [data-type="create-block/texonomy-menu-accordion"] {
     margin-top: 0 !important;
@@ -90,6 +89,12 @@
         /* ============================================= */
         &.ea-template-1 {
             .ea-editor-item {
+                // '--item-gap': `${attributes.itemGap || 16}px` // ✅ Add this line
+                margin-bottom: var(--item-gap, 0px); // ✅ Use the variable
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
 
                 // Parent header
                 >.ea-item-header {
@@ -121,6 +126,7 @@
         /* ============================================= */
         &.ea-template-2 {
             .ea-editor-item {
+                margin-bottom: var(--item-gap, 0px); // ✅ Use the variable
 
                 // All items white background
                 .ea-item-header {
@@ -172,18 +178,20 @@
 
             // ✅ Only top-level items (parents) get bottom margin
             >.ea-editor-item {
-                margin-bottom: 8px; // Spacing between parent sections
+                // by defult would be 8px mas and then would be extended by item gap
+               margin-bottom: max(8px, var(--item-gap, 0px));
+
+                // margin-bottom: 8px; // Spacing between parent sections
 
                 // Remove margin from last parent
                 &:last-child {
                     margin-bottom: 0;
+
                 }
 
                 // Parent header
                 >.ea-item-header {
                     background: #efeeee;
-
-
 
                 }
 

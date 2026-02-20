@@ -1,6 +1,5 @@
 
 
-
 import { Icon, chevronDown, category } from '@wordpress/icons';
 
 const renderList = (items, openItems = {}, toggleItem, template = 0, depth = 0) => {
@@ -17,7 +16,7 @@ const renderList = (items, openItems = {}, toggleItem, template = 0, depth = 0) 
 				const isOpen = !!openItems[item.id];
 
 				return (
-					<li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`}>
+					<li key={item.id} className={`ea-editor-item ${isOpen ? 'is-open' : ''}`} >
 						<div
 							className="ea-item-header"
 							onClick={(e) => {
@@ -43,13 +42,10 @@ const renderList = (items, openItems = {}, toggleItem, template = 0, depth = 0) 
 						>
 							<span className="ea-title">
 								{/* ✅ Show icon only at depth 0 */}
-								{/* {depth === 0 && (
+								 
+								{depth === 0 && template !== 0 && (
 									<Icon icon={category} size={18} className="ea-category-icon" />
-								)} */}
-
-{depth === 0 && template !== 0 && (
-        <Icon icon={category} size={18} className="ea-category-icon" />
-    )}
+								)}
 
 								{item.name || item.title?.rendered}
 							</span>
