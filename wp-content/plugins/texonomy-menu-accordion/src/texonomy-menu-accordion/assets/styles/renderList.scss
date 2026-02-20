@@ -88,7 +88,7 @@
         /* TEMPLATE 1 - Light Header, Dark Children BG */
         /* ============================================= */
         &.ea-template-1 {
-            .ea-editor-item {
+            >.ea-editor-item {
                 // '--item-gap': `${attributes.itemGap || 16}px` // ✅ Add this line
                 margin-bottom: var(--item-gap, 0px); // ✅ Use the variable
 
@@ -125,7 +125,7 @@
         /* TEMPLATE 2 - Icon Left, White BG, Borders Only on Parents */
         /* ============================================= */
         &.ea-template-2 {
-            .ea-editor-item {
+            >.ea-editor-item {
                 margin-bottom: var(--item-gap, 0px); // ✅ Use the variable
 
                 // All items white background
